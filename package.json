@@ -1,6 +1,7 @@
 {
   "name": "status-board-cli",
   "version": "0.0.0-development",
+  "description": "CLI utility for status board",
   "main": "index.js",
   "repository": "git@github.com:jameswlane/status-board-cli.git",
   "author": "James W. Lane <james.w.lane@mac.com>",
