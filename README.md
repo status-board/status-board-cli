@@ -1,4 +1,6 @@
 # status-board-cli
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/jameswlane/status-board-cli.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/jameswlane/status-board-cli.svg?branch=master)](https://travis-ci.org/jameswlane/status-board-cli)
 [![dependencies Status](https://david-dm.org/jameswlane/status-board-cli/status.svg)](https://david-dm.org/jameswlane/status-board-cli)
 [![devDependencies Status](https://david-dm.org/jameswlane/status-board-cli/dev-status.svg)](https://david-dm.org/jameswlane/status-board-cli?type=dev)
