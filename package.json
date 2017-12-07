@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/jameswlane/status-board-cli#readme",
   "dependencies": {
-    "caporal": "0.8.0",
+    "caporal": "0.9.0",
     "jsonfile": "4.0.0"
   },
   "devDependencies": {
