@@ -1,0 +1,22 @@
+{
+
+  "title": "My wallboard title",
+  "titleVisible": false,
+
+  "description": "My first wallboard. This will show up in the dashboard list",
+
+  "layout": {
+      "gridSize" : { "columns" : 20, "rows" : 12 },
+      "customJS" : [],
+      "widgets" : [
+        {"row" : 1, "col" : 1, "width" : 2, "height" : 3, "widget" : "quotes", "job" : "quotes", "config": "quotes"}
+      ]
+  },
+
+  "config": {
+      "quotes" : {
+        "interval" : 10000,
+        "someotherconfig" :  "here"
+      }
+  }
+}
