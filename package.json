@@ -10,6 +10,7 @@
   "author": "James W. Lane <james.w.lane@mac.com>",
   "license": "MIT",
   "scripts": {
+    "test": "jest --coverage",
     "test:ci": "jest --maxWorkers=4",
     "test:coverage:ci": "jest --coverage --maxWorkers=4",
     "test:watch": "jest --watch",
