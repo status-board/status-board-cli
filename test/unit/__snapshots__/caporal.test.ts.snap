@@ -71,7 +71,7 @@ Program {
         "description": [Function],
         "synopsis": [Function],
       },
-      "_logger":  {
+      "_logger": Object {
         "_events": Object {},
         "_eventsCount": 0,
         "_maxListeners": undefined,
@@ -173,7 +173,7 @@ Program {
         "description": [Function],
         "synopsis": [Function],
       },
-      "_logger":  {
+      "_logger": Object {
         "_events": Object {},
         "_eventsCount": 0,
         "_maxListeners": undefined,
@@ -230,7 +230,7 @@ Program {
       "_default": false,
       "_description": "lists all available components (widgets or jobs) among all packages",
       "_lastAddedArgOrOpt": null,
-      "_logger":  {
+      "_logger": Object {
         "_events": Object {},
         "_eventsCount": 0,
         "_maxListeners": undefined,
@@ -318,7 +318,7 @@ Program {
         "description": [Function],
         "synopsis": [Function],
       },
-      "_logger":  {
+      "_logger": Object {
         "_events": Object {},
         "_eventsCount": 0,
         "_maxListeners": undefined,
@@ -433,7 +433,7 @@ Program {
       "_default": false,
       "_description": "install package dependencies",
       "_lastAddedArgOrOpt": null,
-      "_logger":  {
+      "_logger": Object {
         "_events": Object {},
         "_eventsCount": 0,
         "_maxListeners": undefined,
@@ -496,7 +496,7 @@ Program {
     },
     "_program": [Circular],
   },
-  "_logger":  {
+  "_logger": Object {
     "_events": Object {},
     "_eventsCount": 0,
     "_maxListeners": undefined,
