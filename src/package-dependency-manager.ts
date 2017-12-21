@@ -7,6 +7,7 @@ import * as _ from 'underscore';
 
 export function installDependencies(packagesPath: any, callback: any) {
   // Process all available package containers
+  // tslint:disable-next-line max-line-length
   async.map(packagesPath.filter(fs.existsSync), checkPackagesFolder, (mapError: any, results: any) => {
     if (mapError) {
       return callback(mapError);
@@ -38,17 +39,19 @@ function checkPackagesFolder(packagesPath: any, cb: any) {
       return cb(err);
     }
 
+    let processedPackagesDir;
+
     // convert to absolute path
-    allPackagesDir = allPackagesDir.map((partialDir: any) => {
+    processedPackagesDir = allPackagesDir.map((partialDir: any) => {
       return path.join(packagesPath, partialDir);
     });
 
     // make sure we have package.json file
-    allPackagesDir = allPackagesDir.filter((dir: any) => {
+    processedPackagesDir = processedPackagesDir.filter((dir: any) => {
       return fs.statSync(dir).isDirectory() && fs.existsSync(dir + '/package.json');
     });
 
-    cb(null, allPackagesDir);
+    cb(null, processedPackagesDir);
   });
 }
 
@@ -68,20 +71,20 @@ function checkValidIfAtlasboardVersionForPackage(pathPackage: any, callback: any
       return callback(err);
     }
 
-    getValidPackageJSON(atlasboardPackageJsonPath, (err: any, atlasboardPackageJson: any) => {
-      if (err) {
+    getValidPackageJSON(atlasboardPackageJsonPath, (error: any, atlasboardPackageJson: any) => {
+      if (error) {
         return callback('package.json not found for atlasboard at ' + atlasboardPackageJsonPath);
       }
 
       if (packageJson.engines && packageJson.engines.atlasboard) {
         const ok = semver.satisfies(atlasboardPackageJson.version, packageJson.engines.atlasboard);
-        const msg = 'Atlasboard version does not satisfy package dependencies at ' +
-          pathPackage + '. Please consider updating your version of atlasboard. Version required: ' +
-          packageJson.engines.atlasboard + '. Atlasboard version: ' + atlasboardPackageJson.version;
+        // tslint:disable-next-line max-line-length
+        const msg = 'Atlasboard version does not satisfy package dependencies at ' + pathPackage + '. Please consider updating your version of atlasboard. Version required: ' + packageJson.engines.atlasboard + '. Atlasboard version: ' + atlasboardPackageJson.version;
 
         callback(ok ? null : msg);
       } else {
-        callback(null); // not atlasboard reference in engines node
+        // not atlasboard reference in engines node
+        callback(null);
       }
     });
   });
@@ -91,12 +94,13 @@ function checkValidIfAtlasboardVersionForPackage(pathPackage: any, callback: any
  * Install from package folder
  */
 function install(pathPackageJson: any, callback: any) {
-  const currPath = process.cwd(); // save current path
+  // save current path
+  const currPath = process.cwd();
   process.chdir(pathPackageJson);
 
   const isWindows = /^win/.test(process.platform);
   const npmCommand = isWindows ? 'npm.cmd' : 'npm';
-
+  // tslint:disable-next-line max-line-length
   executeCommand(npmCommand, ['install', '--production', pathPackageJson], (err: any, code: any) => {
     if (err) {
       callback('Error installing dependencies for ' + pathPackageJson + '. err:' + err);

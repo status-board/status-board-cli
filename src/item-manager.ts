@@ -16,6 +16,7 @@ const filters: any = {
       const contentJSON = JSON.parse(fs.readFileSync(dashboardPath).toString());
       return (contentJSON.enabled !== false);
     } catch (e) {
+      // tslint:disable-next-line max-line-length
       logger().error('## ERROR ## ' + dashboardPath + ' has an invalid format or file doesn\'t exist\n');
       return false;
     }
@@ -57,6 +58,7 @@ export function resolveCandidates(items: any, name: any, itemType: any, extensio
     const packageName = name.split('#')[0];
     const itemParsedName = name.split('#')[1];
     // package/jobs/job1/job1.js
+    // tslint:disable-next-line max-line-length
     searchCriteria = path.join(packageName, this.resolveLocation(itemParsedName, itemType, extension));
   } else {
     // jobs/job1/job1.js
@@ -74,19 +76,20 @@ export function resolveCandidates(items: any, name: any, itemType: any, extensio
  * Return first candidate found matching name, type and extension
  *
  * @param {[string]} packagesPath : list of directories to find packages in.
- * @param {string} itemName item name to match. It can be namespaced. i.e: atlassian#widget1, widget1
+ * @param {string} itemName item name to match.
+ * It can be namespaced. i.e: atlassian#widget1, widget1
  * @param {string} itemType item type in plural. ('dashboards', 'jobs', 'widgets')
  * @param {string} extension : filter result by extension
  * @param {function} callback : callback
  */
+// tslint:disable-next-line max-line-length
 export function getFirst(packagesPath: any, itemName: any, itemType: any, extension: any, callback: any) {
-  const thiz = this;
   this.get(packagesPath, itemType, extension, (err: any, items: any) => {
     if (err) {
       return callback(err);
     }
 
-    const candidates = thiz.resolveCandidates(items, itemName, itemType, extension);
+    const candidates = this.resolveCandidates(items, itemName, itemType, extension);
     callback(null, candidates.length ? candidates[0] : null);
   });
 }
@@ -123,8 +126,12 @@ export function get(packagesPath: any, itemType: any, extension: any, callback: 
  */
 export function getByPackage(packagesPath: any, itemType: any, extension: any, callback: any) {
 
+  let processPackagesPath;
+
   if (!Array.isArray(packagesPath)) {
-    packagesPath = [packagesPath];
+    processPackagesPath = [packagesPath];
+  } else {
+    processPackagesPath = packagesPath;
   }
 
   function readItemsFromPackageDir(dir: any, cb: any) {
@@ -178,24 +185,26 @@ export function getByPackage(packagesPath: any, itemType: any, extension: any, c
   // - packages/otherpackages/*
   // and calls readItemsFromPackageDir for every one of them
 
-  function fillPackages(packagesPath: any, cb: any) {
-    fs.readdir(packagesPath, (err: any, allPackagesDir: any) => {
-      if (err) {
-        return cb(err);
+  function fillPackages(packagePath: any, cb: any) {
+    fs.readdir(packagePath, (error: any, allPackagesDir: any) => {
+      if (error) {
+        return cb(error);
       }
 
+      let processedAllPackagesDir;
+
       // convert to absolute path
-      allPackagesDir = allPackagesDir.map((partialDir: any) => {
-        return path.join(packagesPath, partialDir);
+      processedAllPackagesDir = allPackagesDir.map((partialDir: any) => {
+        return path.join(packagePath, partialDir);
       });
 
       // get only valid directories
-      allPackagesDir = allPackagesDir.filter((dir: any) => {
+      processedAllPackagesDir = processedAllPackagesDir.filter((dir: any) => {
         return fs.statSync(dir).isDirectory();
       });
 
       // read items from every package and flatten results
-      async.map(allPackagesDir, readItemsFromPackageDir, (err: any, results: any) => {
+      async.map(processedAllPackagesDir, readItemsFromPackageDir, (err: any, results: any) => {
         if (err) {
           return cb(err);
         }
@@ -205,7 +214,7 @@ export function getByPackage(packagesPath: any, itemType: any, extension: any, c
   }
 
   // process all package paths
-  async.map(packagesPath.filter(fs.existsSync), fillPackages, (err: any, results: any) => {
+  async.map(processPackagesPath.filter(fs.existsSync), fillPackages, (err: any, results: any) => {
     if (err) {
       return callback(err);
     }

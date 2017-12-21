@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import * as mkdirp from 'mkdirp';
 import * as path from 'path';
 
-// let debug = require('debug')('scaffolding');
+const debugLog = debug('scaffolding');
 
 /**
  * Folder scaffolding
@@ -16,20 +16,19 @@ import * as path from 'path';
  * @param  {Function} cb                   Callback (err, null);
  */
 export function scaffold(templateSourceFolder: any, destinationFolder: any, options: any, cb: any) {
-  if (!cb) { // options parameter is optional
-    cb = options;
-    options = {};
-  }
-
   function applyReplacements(fileName: any, replacements: any) {
+    let processedFileName;
+    // tslint:disable-next-line forin
     for (const item in replacements) {
       const replace = replacements[item];
       if (fileName.indexOf(item) > -1) {
-        fileName = fileName.replace(item, replace);
+        processedFileName = fileName.replace(item, replace);
         break;
+      } else {
+        processedFileName = fileName;
       }
     }
-    return fileName;
+    return processedFileName;
   }
 
   // based on http://stackoverflow.com/questions/13786160/copy-folder-recursively-in-node-js
@@ -38,12 +37,14 @@ export function scaffold(templateSourceFolder: any, destinationFolder: any, opti
     const stats = exists && fs.statSync(src);
     const isDirectory = exists && stats.isDirectory();
     if (exists && isDirectory) {
-      debug('creating directory', dest);
+      debugLog('creating directory', dest);
       fs.mkdirSync(dest);
       fs.readdirSync(src).forEach((childItemName: any) => {
-        debug('copying from', src, 'into', dest, 'File:', childItemName);
-        copyRecursiveSync(path.join(src, childItemName),
-          path.join(dest, childItemName));
+        debugLog('copying from', src, 'into', dest, 'File:', childItemName);
+        copyRecursiveSync(
+          path.join(src, childItemName),
+          path.join(dest, childItemName),
+        );
       });
     } else {
       const destinationFile = applyReplacements(dest, options.replace || {});

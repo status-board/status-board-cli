@@ -2,7 +2,7 @@ import * as async from 'async';
 import chalk from 'chalk';
 import * as fs from 'fs';
 import * as path from 'path';
-import statusBoard from 'status-board';
+// import statusBoard from 'status-board';
 import * as _ from 'underscore';
 
 import { areValidPathElements, isPathContainedInRoot } from '../helpers';
@@ -121,25 +121,29 @@ export function newProject(srcDir: any, destDir: any, logger: any, callback: any
 }
 
 export function list(packagesPath: any, logger: any, callback: any) {
-  packagesPath = Array.isArray(packagesPath) ? packagesPath : [packagesPath];
-  async.map(_.unique(packagesPath), (packagePath: any, cb: any) => {
-    const list = { package: packagePath };
-    getByPackage(packagePath, 'widgets', '.js', (err: any, packagesWidgetList: any) => {
-      if (err) {
-        return cb(err);
-      }
-      list.widgets = packagesWidgetList;
-      getByPackage(packagePath, 'jobs', '.js', (err: any, packagesJobList: any) => {
+  const packagePath = Array.isArray(packagesPath) ? packagesPath : [packagesPath];
+  async.map(
+    _.unique(packagePath),
+    (pkgPath: any, cb: any) => {
+      const packageList: any = { package: pkgPath };
+      getByPackage(pkgPath, 'widgets', '.js', (err: any, packagesWidgetList: any) => {
         if (err) {
           return cb(err);
         }
-        list.jobs = packagesJobList;
-        cb(null, (list.widgets.length && list.jobs.length) ? list : null);
+        packageList.widgets = packagesWidgetList;
+        getByPackage(pkgPath, 'jobs', '.js', (error: any, packagesJobList: any) => {
+          if (error) {
+            return cb(error);
+          }
+          packageList.jobs = packagesJobList;
+          cb(null, (packageList.widgets.length && packageList.jobs.length) ? packageList : null);
+        });
       });
-    });
-  }, (err: any, results: any) => {
-    callback(err, _.compact(results));
-  });
+    },
+    (err: any, results: any) => {
+      callback(err, _.compact(results));
+    },
+  );
 }
 
 export function start(options: any, logger: any, callback: any) {
@@ -149,7 +153,7 @@ export function start(options: any, logger: any, callback: any) {
   }
 
   // start Status Board
-  statusBoard(options, callback);
+  // statusBoard(options, callback);
 }
 
 export function install(options: any, logger: any, callback: any) {
