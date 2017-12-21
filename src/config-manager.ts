@@ -4,9 +4,11 @@ import * as path from 'path';
 
 const debug = require('debug')('config-manager');
 
+import logger from './logger';
+
 export default function (configFileName: any) {
 
-  function readConfigIfExists(fileName) {
+  function readConfigIfExists(fileName: any) {
     if (!path.extname(fileName)) {
       fileName = fileName + '.js';
     }
@@ -25,9 +27,8 @@ export default function (configFileName: any) {
         const configValue = JSON.parse(process.env[key]);
         if (typeof configValue === 'object') {
           return JSON.parse(process.env[key]);
-        } else {
-          throw new Error('ENV configuration key ' + key + ' could not be serialized into an object: ' + process.env[key]);
         }
+        logger().error(new Error('ENV configuration key ' + key + ' could not be serialized into an object: ' + process.env[key]));
       } catch (e) {
         throw new Error('ENV configuration key ' + key + ' contains invalid JSON: ' + process.env[key]);
       }

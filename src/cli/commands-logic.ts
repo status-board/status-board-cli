@@ -123,25 +123,23 @@ export function newProject(srcDir: any, destDir: any, logger: any, callback: any
 export function list(packagesPath: any, logger: any, callback: any) {
   packagesPath = Array.isArray(packagesPath) ? packagesPath : [packagesPath];
   async.map(_.unique(packagesPath), (packagePath: any, cb: any) => {
-    const list: any = { package: packagePath };
+    const list = { package: packagePath };
     getByPackage(packagePath, 'widgets', '.js', (err: any, packagesWidgetList: any) => {
+      if (err) {
+        return cb(err);
+      }
+      list.widgets = packagesWidgetList;
+      getByPackage(packagePath, 'jobs', '.js', (err: any, packagesJobList: any) => {
         if (err) {
           return cb(err);
         }
-        list.widgets = packagesWidgetList;
-        getByPackage(packagePath, 'jobs', '.js', (err: any, packagesJobList: any) => {
-          if (err) {
-            return cb(err);
-          }
-          list.jobs = packagesJobList;
-          cb(null, (list.widgets.length && list.jobs.length) ? list : null);
-        });
+        list.jobs = packagesJobList;
+        cb(null, (list.widgets.length && list.jobs.length) ? list : null);
       });
-  },
-            (err: any, results: any) => {
-              callback(err, _.compact(results));
-            },
-  );
+    });
+  }, (err: any, results: any) => {
+    callback(err, _.compact(results));
+  });
 }
 
 export function start(options: any, logger: any, callback: any) {

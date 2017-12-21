@@ -10,11 +10,10 @@ import logger from './logger';
  * item should be included in the list to be returned.
  * You can match extensions, do sanity checks (valid JSON), etc.
  */
-
-const filters = {
-  dashboards(dashboardPath) {
+const filters: any = {
+  dashboards(dashboardPath: any) {
     try {
-      const contentJSON = JSON.parse(fs.readFileSync(dashboardPath));
+      const contentJSON = JSON.parse(fs.readFileSync(dashboardPath).toString());
       return (contentJSON.enabled !== false);
     } catch (e) {
       logger().error('## ERROR ## ' + dashboardPath + ' has an invalid format or file doesn\'t exist\n');
@@ -34,15 +33,14 @@ const filters = {
  *
  * @return {string} relative path to item: jobs/job1/job1.js
  */
-export function resolveLocation(name, itemType, extension) {
+export function resolveLocation(name: any, itemType: any, extension: any) {
   const useDirectoryLevel = ((itemType === 'widgets') || (itemType === 'jobs'));
   if (useDirectoryLevel) {
     // jobs/job1/job1.js
     return path.join(itemType, name, name + extension);
-  } else {
-    // dashboards/dashboard.json
-    return path.join(itemType, name + extension);
   }
+  // dashboards/dashboard.json
+  return path.join(itemType, name + extension);
 }
 
 /**
@@ -53,7 +51,7 @@ export function resolveLocation(name, itemType, extension) {
  * @param {string} itemType item type in plural. ('dashboards', 'jobs', 'widgets')
  * @param {string} extension : filter result by extension
  */
-export function resolveCandidates(items, name, itemType, extension) {
+export function resolveCandidates(items: any, name: any, itemType: any, extension: any) {
   let searchCriteria = '';
   if (name.indexOf('#') > -1) {
     const packageName = name.split('#')[0];
@@ -67,7 +65,7 @@ export function resolveCandidates(items, name, itemType, extension) {
 
   searchCriteria = path.sep + searchCriteria;
 
-  return items.filter(function (item) {
+  return items.filter((item: any) => {
     return item.indexOf(searchCriteria) > -1;
   });
 }
@@ -79,10 +77,11 @@ export function resolveCandidates(items, name, itemType, extension) {
  * @param {string} itemName item name to match. It can be namespaced. i.e: atlassian#widget1, widget1
  * @param {string} itemType item type in plural. ('dashboards', 'jobs', 'widgets')
  * @param {string} extension : filter result by extension
+ * @param {function} callback : callback
  */
-export function getFirst(packagesPath, itemName, itemType, extension, callback) {
+export function getFirst(packagesPath: any, itemName: any, itemType: any, extension: any, callback: any) {
   const thiz = this;
-  this.get(packagesPath, itemType, extension, function (err, items) {
+  this.get(packagesPath, itemType, extension, (err: any, items: any) => {
     if (err) {
       return callback(err);
     }
@@ -98,15 +97,16 @@ export function getFirst(packagesPath, itemName, itemType, extension, callback) 
  * @param {[string]} packagesPath : list of directories to find packages in.
  * @param {string} itemType item type in plural. ('dashboards', 'jobs', 'widgets')
  * @param {string} extension : filter result by extension
+ * @param {function} callback : callback
  */
-export function get(packagesPath, itemType, extension, callback) {
-  this.getByPackage(packagesPath, itemType, extension, function (err, results) {
+export function get(packagesPath: any, itemType: any, extension: any, callback: any) {
+  this.getByPackage(packagesPath, itemType, extension, (err: any, results: any) => {
     if (err) {
       return callback(err);
     }
-    let items = [];
-    results.forEach(function (package) {
-      items = items.concat(package.items);
+    let items: any[] = [];
+    results.forEach((packages: any) => {
+      items = items.concat(packages.items);
     });
     callback(null, items);
   });
@@ -119,20 +119,21 @@ export function get(packagesPath, itemType, extension, callback) {
  * @param {[string]} packagesPath : list of directories to find packages in.
  * @param {string} itemType item type in plural. ('dashboards', 'jobs', 'widgets')
  * @param {string} extension : filter result by extension
+ * @param {function} callback : callback
  */
-export function getByPackage(packagesPath, itemType, extension, callback) {
+export function getByPackage(packagesPath: any, itemType: any, extension: any, callback: any) {
 
   if (!Array.isArray(packagesPath)) {
     packagesPath = [packagesPath];
   }
 
-  function readItemsFromPackageDir(dir, cb) {
-    const package = { dir };
+  function readItemsFromPackageDir(dir: any, cb: any) {
+    const packages: any = { dir };
 
     const itemDir = path.join(dir, itemType);
     if (!fs.existsSync(itemDir)) {
-      package.items = [];
-      return cb(null, package);
+      packages.items = [];
+      return cb(null, packages);
     }
 
     // this functions parses:
@@ -142,18 +143,18 @@ export function getByPackage(packagesPath, itemType, extension, callback) {
     // - packages/default/<itemType>/*/*.js
     // - packages/otherpackages/<itemType>/*/*.js
     // for jobs and widgets
-    fs.readdir(itemDir, function (err, items) {
+    fs.readdir(itemDir, (err: any, items: any) => {
       if (err) {
         return cb(err);
       }
 
-      let selectedItems = [];
-      items.forEach(function (item_name) {
-        let item = path.join(itemDir, item_name);
+      let selectedItems: any[] = [];
+      items.forEach((itemName: any) => {
+        let item = path.join(itemDir, itemName);
         const stat = fs.statSync(item);
         if (stat.isDirectory()) {
           // /job/job1/job1.js
-          item = path.join(item, item_name + extension);
+          item = path.join(item, itemName + extension);
         }
 
         if (path.extname(item) === extension) {
@@ -167,8 +168,8 @@ export function getByPackage(packagesPath, itemType, extension, callback) {
         selectedItems = selectedItems.filter(filters[itemType]);
       }
 
-      package.items = selectedItems;
-      return cb(null, package);
+      packages.items = selectedItems;
+      return cb(null, packages);
     });
   }
 
@@ -177,24 +178,24 @@ export function getByPackage(packagesPath, itemType, extension, callback) {
   // - packages/otherpackages/*
   // and calls readItemsFromPackageDir for every one of them
 
-  function fillPackages(packagesPath, cb) {
-    fs.readdir(packagesPath, function (err, allPackagesDir) {
+  function fillPackages(packagesPath: any, cb: any) {
+    fs.readdir(packagesPath, (err: any, allPackagesDir: any) => {
       if (err) {
         return cb(err);
       }
 
       // convert to absolute path
-      allPackagesDir = allPackagesDir.map(function (partialDir) {
+      allPackagesDir = allPackagesDir.map((partialDir: any) => {
         return path.join(packagesPath, partialDir);
       });
 
       // get only valid directories
-      allPackagesDir = allPackagesDir.filter(function (dir) {
+      allPackagesDir = allPackagesDir.filter((dir: any) => {
         return fs.statSync(dir).isDirectory();
       });
 
       // read items from every package and flatten results
-      async.map(allPackagesDir, readItemsFromPackageDir, function (err, results) {
+      async.map(allPackagesDir, readItemsFromPackageDir, (err: any, results: any) => {
         if (err) {
           return cb(err);
         }
@@ -204,7 +205,7 @@ export function getByPackage(packagesPath, itemType, extension, callback) {
   }
 
   // process all package paths
-  async.map(packagesPath.filter(fs.existsSync), fillPackages, function (err, results) {
+  async.map(packagesPath.filter(fs.existsSync), fillPackages, (err: any, results: any) => {
     if (err) {
       return callback(err);
     }

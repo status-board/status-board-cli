@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import logger from './logger';
 
 export function isPathContainedInRoot(pathDir: any, root: any) {
   if (typeof root !== 'string' || typeof pathDir !== 'string') {
@@ -24,7 +25,7 @@ export function areValidPathElements(paths: any) {
     }
 
     let malicius = false;
-    path = path.toString(); //in case it is another type, like number
+    path = path.toString(); // In case it is another type, like number
 
     if ((path.indexOf('/') !== -1) || (path.indexOf('\\') !== -1)) {
       malicius = true;
@@ -39,11 +40,10 @@ export function areValidPathElements(paths: any) {
     }
 
     if (malicius) {
-      console.log('Malicious path detected: %s', path);
+      logger().log('Malicious path detected: %s', path);
       return false;
-    } else {
-      return true;
     }
+    return true;
   }
 
   paths = Array.isArray(paths) ? paths : [paths];
@@ -75,7 +75,7 @@ export function getJSONFromFile(path: any, defaultValue: any, warnIfFileNotExist
       }
       return defaultValue;
     }
-    return JSON.parse(fs.readFileSync(path));
+    return JSON.parse(fs.readFileSync(path).toString());
   } catch (e) {
     if (warnIfFileIsInvalid) {
       warnIfFileIsInvalid(path, e);

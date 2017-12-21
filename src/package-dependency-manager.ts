@@ -7,19 +7,20 @@ import * as _ from 'underscore';
 
 export function installDependencies(packagesPath: any, callback: any) {
   // Process all available package containers
-  async.map(packagesPath.filter(fs.existsSync), checkPackagesFolder, function (err, results) {
-    if (err) {
-      return callback(err);
+  async.map(packagesPath.filter(fs.existsSync), checkPackagesFolder, (mapError: any, results: any) => {
+    if (mapError) {
+      return callback(mapError);
     }
+
     const paths = _.flatten(results);
 
-    async.eachSeries(paths, checkValidIfAtlasboardVersionForPackage, function (err) {
-      if (err) {
-        return callback(err);
+    async.eachSeries(paths, checkValidIfAtlasboardVersionForPackage, (eachSeriesError: any) => {
+      if (eachSeriesError) {
+        return callback(eachSeriesError);
       }
 
-      async.eachSeries(paths, install, function (err) {
-        callback(err);
+      async.eachSeries(paths, install, (error: any) => {
+        callback(error);
       });
     });
   });
@@ -32,18 +33,18 @@ const atlasboardPackageJsonPath = path.join(__dirname, '../');
  * Search for packages in the current folder
  */
 function checkPackagesFolder(packagesPath: any, cb: any) {
-  fs.readdir(packagesPath, function (err, allPackagesDir) {
+  fs.readdir(packagesPath, (err: any, allPackagesDir: any) => {
     if (err) {
       return cb(err);
     }
 
     // convert to absolute path
-    allPackagesDir = allPackagesDir.map(function (partialDir) {
+    allPackagesDir = allPackagesDir.map((partialDir: any) => {
       return path.join(packagesPath, partialDir);
     });
 
     // make sure we have package.json file
-    allPackagesDir = allPackagesDir.filter(function (dir) {
+    allPackagesDir = allPackagesDir.filter((dir: any) => {
       return fs.statSync(dir).isDirectory() && fs.existsSync(dir + '/package.json');
     });
 
@@ -62,12 +63,12 @@ function getValidPackageJSON(pathPackage: any, callback: any) {
  * Install from package folder
  */
 function checkValidIfAtlasboardVersionForPackage(pathPackage: any, callback: any) {
-  getValidPackageJSON(pathPackage, function (err, packageJson) {
+  getValidPackageJSON(pathPackage, (err: any, packageJson: any) => {
     if (err) {
       return callback(err);
     }
 
-    getValidPackageJSON(atlasboardPackageJsonPath, function (err, atlasboardPackageJson) {
+    getValidPackageJSON(atlasboardPackageJsonPath, (err: any, atlasboardPackageJson: any) => {
       if (err) {
         return callback('package.json not found for atlasboard at ' + atlasboardPackageJsonPath);
       }
@@ -96,7 +97,7 @@ function install(pathPackageJson: any, callback: any) {
   const isWindows = /^win/.test(process.platform);
   const npmCommand = isWindows ? 'npm.cmd' : 'npm';
 
-  executeCommand(npmCommand, ['install', '--production', pathPackageJson], function (err, code) {
+  executeCommand(npmCommand, ['install', '--production', pathPackageJson], (err: any, code: any) => {
     if (err) {
       callback('Error installing dependencies for ' + pathPackageJson + '. err:' + err);
     } else {
@@ -104,7 +105,8 @@ function install(pathPackageJson: any, callback: any) {
     }
   });
 
-  process.chdir(currPath); //restore path
+  // Restore path
+  process.chdir(currPath);
 }
 
 /**
@@ -113,10 +115,10 @@ function install(pathPackageJson: any, callback: any) {
 function executeCommand(cmd: any, args: any, callback: any) {
   const childProcess = require('child_process');
   const child = childProcess.spawn(cmd, args, { stdio: 'inherit' });
-  child.on('error', function (err) {
+  child.on('error', (err: any) => {
     callback(err);
   });
-  child.on('exit', function (code) {
+  child.on('exit', (code: any) => {
     callback(null, code);
   });
 }
