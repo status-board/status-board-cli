@@ -4310,7 +4310,7 @@ stack-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
 
-status-board@^1.1.14:
+status-board@1.1.14:
   version "1.1.14"
   resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.14.tgz#ec8828eddf8d0dfa30435724a7283c8485ce54b0"
   dependencies:
