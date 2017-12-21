@@ -44,7 +44,7 @@
     "mkdirp": "0.5.1",
     "sanitize-filename": "1.6.1",
     "semver": "5.4.1",
-    "status-board": "1.1.14",
+    "status-board": "^1.1.14",
     "tracer": "0.8.11",
     "underscore": "1.8.3",
     "winston": "2.4.0",

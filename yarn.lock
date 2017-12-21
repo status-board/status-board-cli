@@ -3141,9 +3141,9 @@ modify-values@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/modify-values/-/modify-values-1.0.0.tgz#e2b6cdeb9ce19f99317a53722f3dbf5df5eaaab2"
 
-moment@2.20.0:
-  version "2.20.0"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.0.tgz#53396358994dd3a551e966a66af715ecb6c30ad0"
+moment@2.20.1:
+  version "2.20.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
 morgan@1.9.0:
   version "1.9.0"
@@ -4310,9 +4310,9 @@ stack-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
 
-status-board@1.1.13:
-  version "1.1.13"
-  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.13.tgz#62368423027c93e317dce7fd48bcefc21f5841d9"
+status-board@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.14.tgz#ec8828eddf8d0dfa30435724a7283c8485ce54b0"
   dependencies:
     async "2.6.0"
     body-parser "1.18.2"
@@ -4324,7 +4324,7 @@ status-board@1.1.13:
     errorhandler "1.5.0"
     express "4.16.2"
     method-override "2.3.10"
-    moment "2.20.0"
+    moment "2.20.1"
     morgan "1.9.0"
     nib "1.1.2"
     pg "7.4.0"
