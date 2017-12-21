@@ -1,148 +1,160 @@
-#!/usr/bin/env node
-var fs = require('fs');
-var path = require('path');
-var scaffolding = require('./scaffolding');
-var itemManager = require('../item-manager');
-var async = require('async');
-var _ = require('underscore');
-var helpers = require('../helpers');
-var packageDependencyManager = require('../package-dependency-manager');
-var atlasboard = require('../atlasboard');
+import * as async from 'async';
+import chalk from 'chalk';
+import * as fs from 'fs';
+import * as path from 'path';
+import statusBoard from 'status-board';
+import * as _ from 'underscore';
 
-require('colors');
+import { areValidPathElements, isPathContainedInRoot } from '../helpers';
+import { getByPackage } from '../item-manager';
+import { installDependencies } from '../package-dependency-manager';
+import { scaffold } from './scaffolding';
 
-function directoryHasAtlasBoardProject(dir){
-  var requiredItems = ["packages", "package.json", "config"]; //the project should have these items
-  return requiredItems.every(function (item) { return fs.existsSync(path.join(dir, item));});
+function directoryHasAtlasBoardProject(dir: any) {
+  // The project should have these items
+  const requiredItems = ['packages', 'package.json', 'config'];
+  return requiredItems.every((item) => {
+    return fs.existsSync(path.join(dir, item));
+  });
 }
 
-var validNewDirectoryExp = /^[a-zA-Z0-9_-]*$/;
+const validNewDirectoryExp = /^[a-zA-Z0-9_-]*$/;
 
-module.exports = {
+// tslint:disable-next-line max-line-length
+export function generate(projectDir: any, packages: any, itemType: any, itemName: any, logger: any, callback: any) {
 
-  generate: function (projectDir, package, itemType, itemName, callback){
+  if (!areValidPathElements([itemType, itemName])) {
+    return callback('invalid input');
+  }
 
-    if (!helpers.areValidPathElements([itemType, itemName])){
-      return callback('invalid input');
-    }
+  const templateFolder = path.join(__dirname, '../..', 'templates', 'new-components');
 
-    var templateFolder = path.join(__dirname, "../..", "templates", "new-components");
+  // Assert valid parameter usage
+  const itemsToGenerate = ['widget', 'dashboard', 'job'];
+  if (itemsToGenerate.indexOf(itemType) === -1) {
+    // tslint:disable-next-line max-line-length
+    return callback('Invalid generator ' + itemType + '\nUse one of: ' + itemsToGenerate.join(', '));
+  }
 
-    //Assert valid parameter usage
-    var itemsToGenerate = ["widget", "dashboard", "job"];
-    if (itemsToGenerate.indexOf(itemType) == -1) {
-      return callback("Invalid generator " + itemType + "\nUse one of: " + itemsToGenerate.join(", "));
-    }
+  // Assert a project already exists here
+  if (!directoryHasAtlasBoardProject(projectDir)) {
+    // tslint:disable-next-line max-line-length
+    return callback('It seems that no project exists here yet. Please navigate to your project\'s root directory, or generate one first.');
+  }
 
-    //Assert a project already exists here
-    if (!directoryHasAtlasBoardProject(projectDir)){
-      return callback("It seems that no project exists here yet. Please navigate to your project's root directory, or generate one first.");
-    }
+  // Assert name given
+  if (!itemName) {
+    // tslint:disable-next-line max-line-length
+    return callback('ERROR: No ' + itemType + ' name provided. Please try again with a name after the generate parameter');
+  }
 
-    //Assert name given
-    if (!itemName) {
-      return callback("ERROR: No " + itemType + " name provided. Please try again with a name after the generate parameter");
-    }
+  // Assert no such item exists there yet
+  const destPackageLocation = path.join(projectDir, 'packages', packages);
 
-    //Assert no such item exists there yet
-    var destPackageLocation = path.join(projectDir, "packages", package);
+  let options = {};
+  let target;
+  let src;
 
-    var options = {};
-    var target, src;
+  if (itemType === 'dashboard') { // all dashboards files are stored within the dashboards folder
+    src = path.join(templateFolder, 'dashboard', 'default.json');
+    target = path.join(destPackageLocation, 'dashboards', itemName + '.json');
+  } else {
 
-    if (itemType === 'dashboard'){ // all dashboards files are stored within the dashboards folder
-      src = path.join(templateFolder, 'dashboard', 'default.json');
-      target = path.join(destPackageLocation, 'dashboards', itemName + '.json');
-    }
-    else {
+    src = path.join(templateFolder, itemType);
+    target = path.join(path.join(destPackageLocation, itemType + 's'), itemName);
 
-      src = path.join(templateFolder, itemType);
-      target = path.join(path.join(destPackageLocation, itemType + "s"), itemName);
-
-      options = {
-        engine : 'ejs',
-        data : {
-          name: itemName
-        },
-        replace: {
-          "widget.": itemName + '.',
-          "default.js": itemName + '.js'
-         }
-      };
-    }
-
-    if (fs.existsSync(target)) {
-      return callback ("ERROR: This " + itemType + " already seems to exist at " + target);
-    }
-
-    console.log("\nCreating new %s at %s...", itemType, target);
-    scaffolding.scaffold(src, target, options, callback);
-    console.log("SUCCESS !!".green + '\n');
-  },
-
-  newProject: function(srcDir, destDir, callback) {
-
-    //check for valid directory name
-    var dirName = path.basename(destDir);
-    if (!dirName.match(validNewDirectoryExp)){
-      return callback('Invalid wallboard name');
-    }
-
-    if (!helpers.isPathContainedInRoot(destDir, process.cwd())){
-      return callback('invalid directory');
-    }
-
-    console.log("\n  Generating a new AtlasBoard project at %s...", destDir.gray);
-
-    var parentDir = path.dirname(destDir);
-
-    if (directoryHasAtlasBoardProject(parentDir)){
-      return callback("You can not create an atlasboard inside a directory containing an atlasboard (at least we think you shouldn't)");
-    }
-
-    if (fs.existsSync(destDir)) {
-      return callback("There is already a directory here called " + destDir + ". Please choose a new name.");
-    }
-
-    console.log("  Creating new wallboard ...");
-    var options = {
-      engine : 'ejs',
-      data : {
-        name : dirName
-      }
+    options = {
+      data: {
+        name: itemName,
+      },
+      engine: 'ejs',
+      replace: {
+        'default.js': itemName + '.js',
+        'widget.': itemName + '.',
+      },
     };
-    scaffolding.scaffold(srcDir, destDir, options, callback);
-  },
+  }
 
-  list : function(packagesPath, callback){
-    packagesPath = Array.isArray(packagesPath) ? packagesPath : [packagesPath];
-    async.map(_.unique(packagesPath), function(packagePath, cb){
-      var list = { package : packagePath};
-      itemManager.getByPackage(packagePath, "widgets", ".js", function(err, packagesWidgetList){
-        if (err) {return cb(err);}
+  if (fs.existsSync(target)) {
+    return callback('ERROR: This ' + itemType + ' already seems to exist at ' + target);
+  }
+
+  logger.log('\nCreating new %s at %s...', itemType, target);
+  scaffold(src, target, options, callback);
+  logger.log(chalk.green('SUCCESS !!') + '\n');
+}
+
+export function newProject(srcDir: any, destDir: any, logger: any, callback: any) {
+
+  // Check for valid directory name
+  const dirName = path.basename(destDir);
+  if (!dirName.match(validNewDirectoryExp)) {
+    return callback('Invalid wallboard name');
+  }
+
+  if (!isPathContainedInRoot(destDir, process.cwd())) {
+    return callback('invalid directory');
+  }
+
+  logger.log('\n  Generating a new AtlasBoard project at %s...', destDir.gray);
+
+  const parentDir = path.dirname(destDir);
+
+  if (directoryHasAtlasBoardProject(parentDir)) {
+    // tslint:disable-next-line max-line-length
+    return callback('You can not create an atlasboard inside a directory containing an atlasboard (at least we think you shouldn\'t)');
+  }
+
+  if (fs.existsSync(destDir)) {
+    // tslint:disable-next-line max-line-length
+    return callback('There is already a directory here called ' + destDir + '. Please choose a new name.');
+  }
+
+  logger.log('  Creating new wallboard ...');
+  const options = {
+    data: {
+      name: dirName,
+    },
+    engine: 'ejs',
+  };
+  scaffold(srcDir, destDir, options, callback);
+}
+
+export function list(packagesPath: any, logger: any, callback: any) {
+  packagesPath = Array.isArray(packagesPath) ? packagesPath : [packagesPath];
+  async.map(_.unique(packagesPath), (packagePath: any, cb: any) => {
+    const list: any = { package: packagePath };
+    getByPackage(packagePath, 'widgets', '.js', (err: any, packagesWidgetList: any) => {
+        if (err) {
+          return cb(err);
+        }
         list.widgets = packagesWidgetList;
-        itemManager.getByPackage(packagePath, "jobs", ".js", function(err, packagesJobList){
-          if (err) {return cb(err);}
+        getByPackage(packagePath, 'jobs', '.js', (err: any, packagesJobList: any) => {
+          if (err) {
+            return cb(err);
+          }
           list.jobs = packagesJobList;
           cb(null, (list.widgets.length && list.jobs.length) ? list : null);
         });
       });
-    }, function (err, results){
-      callback(err, _.compact(results));
-    });
   },
+            (err: any, results: any) => {
+              callback(err, _.compact(results));
+            },
+  );
+}
 
-  start : function(options, callback){
-    if (!directoryHasAtlasBoardProject(process.cwd())){
-      return callback("I couldn't find a valid AtlasBoard dashboard. Try generating one with `atlasboard new DASHBOARDNAME`.");
-    }
-
-    // start AtlasBoard
-    atlasboard(options, callback);
-  },
-
-  install : function(options, callback) {
-    var packagesLocalFolder = path.join(process.cwd(), "/packages");
-    packageDependencyManager.installDependencies([packagesLocalFolder], callback);
+export function start(options: any, logger: any, callback: any) {
+  if (!directoryHasAtlasBoardProject(process.cwd())) {
+    // tslint:disable-next-line max-line-length
+    return callback('I couldn\'t find a valid AtlasBoard dashboard. Try generating one with `atlasboard new DASHBOARDNAME`.');
   }
-};
+
+  // start Status Board
+  statusBoard(options, callback);
+}
+
+export function install(options: any, logger: any, callback: any) {
+  const packagesLocalFolder = path.join(process.cwd(), '/packages');
+  installDependencies([packagesLocalFolder], callback);
+}

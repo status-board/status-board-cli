@@ -2,6 +2,14 @@ import * as caporal from 'caporal';
 import { readFileSync } from 'jsonfile';
 import * as path from 'path';
 
+import {
+  generate,
+  install,
+  list,
+  newProject,
+  start,
+} from './cli/commands';
+
 const pkg = readFileSync(path.normalize(path.join(__dirname, '../package.json')));
 
 caporal
@@ -22,6 +30,11 @@ caporal
     logger.info('Command \'generate\' called with:');
     logger.info('arguments: %j', args);
     logger.info('options: %j', options);
+    generate(args, options, logger, (error: any) => {
+      if (error) {
+        throw Error(error);
+      }
+    });
   })
 
   /**
@@ -37,6 +50,11 @@ caporal
     logger.info('Command \'new\' called with:');
     logger.info('arguments: %j', args);
     logger.info('options: %j', options);
+    newProject(args, options, logger, (error: any) => {
+      if (error) {
+        throw Error(error);
+      }
+    });
   })
 
   /**
@@ -48,6 +66,11 @@ caporal
     logger.info('Command \'list\' called with:');
     logger.info('arguments: %j', args);
     logger.info('options: %j', options);
+    list(args, options, logger, (error: any) => {
+      if (error) {
+        throw Error(error);
+      }
+    });
   })
 
   /**
@@ -67,6 +90,11 @@ caporal
     logger.info('Command \'start\' called with:');
     logger.info('arguments: %j', args);
     logger.info('options: %j', options);
+    start(args, options, logger, (error: any) => {
+      if (error) {
+        throw Error(error);
+      }
+    });
   })
 
   /**
@@ -78,6 +106,11 @@ caporal
     logger.info('Command \'install\' called with:');
     logger.info('arguments: %j', args);
     logger.info('options: %j', options);
+    install(args, options, logger, (error: any) => {
+      if (error) {
+        throw Error(error);
+      }
+    });
   });
 
 export default caporal;

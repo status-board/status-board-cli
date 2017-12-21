@@ -1,9 +1,10 @@
-var fs = require('fs');
-var path = require('path');
-var extend = require('xtend');
-var debug = require('debug')('config-manager');
+import * as extend from 'extend';
+import * as fs from 'fs';
+import * as path from 'path';
 
-exports = module.exports = function (configFileName) {
+const debug = require('debug')('config-manager');
+
+export default function (configFileName: any) {
 
   function readConfigIfExists(fileName) {
     if (!path.extname(fileName)) {
@@ -16,29 +17,29 @@ exports = module.exports = function (configFileName) {
   }
 
   function readEnv() {
-    var key = 'ATLASBOARD_CONFIG_' + configFileName;
+    const key = 'ATLASBOARD_CONFIG_' + configFileName;
     debug('ENV key', key);
     if (process.env[key]) {
       debug('ENV configuration found for', key);
       try {
-        var configValue = JSON.parse(process.env[key]);
+        const configValue = JSON.parse(process.env[key]);
         if (typeof configValue === 'object') {
           return JSON.parse(process.env[key]);
         } else {
-          throw 'ENV configuration key ' + key + ' could not be serialized into an object: ' + process.env[key];
+          throw new Error('ENV configuration key ' + key + ' could not be serialized into an object: ' + process.env[key]);
         }
       } catch (e) {
-        throw 'ENV configuration key ' + key + ' contains invalid JSON: ' + process.env[key];
+        throw new Error('ENV configuration key ' + key + ' contains invalid JSON: ' + process.env[key]);
       }
     }
   }
 
-  var localConfigFilePath = path.join(process.cwd(), 'config', configFileName);
-  var atlasboardConfigFilePath = path.join(__dirname, '../config/', configFileName);
+  const localConfigFilePath = path.join(process.cwd(), 'config', configFileName);
+  const atlasboardConfigFilePath = path.join(__dirname, '../config/', configFileName);
 
   return extend(
-      readConfigIfExists(atlasboardConfigFilePath),
-      readConfigIfExists(localConfigFilePath),
-      readEnv()
+    readConfigIfExists(atlasboardConfigFilePath),
+    readConfigIfExists(localConfigFilePath),
+    readEnv(),
   );
-};
+}
