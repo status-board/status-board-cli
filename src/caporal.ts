@@ -1,4 +1,4 @@
-import * as caporal from 'caporal';
+import caporal from 'caporal';
 import { readFileSync } from 'jsonfile';
 import * as path from 'path';
 
