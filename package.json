@@ -25,7 +25,7 @@
     "verify:check": "depcheck",
     "verify:tscheck": "types-checker",
     "setup": "npm i -g npmvet david nsp depcheck types-checker commitizen semantic-release-cli",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "semantic-release": "semantic-release"
   },
   "keywords": [
     "react"
