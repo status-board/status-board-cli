@@ -43,7 +43,7 @@
     "jsonfile": "4.0.0",
     "mkdirp": "0.5.1",
     "sanitize-filename": "1.6.1",
-    "semver": "5.4.1",
+    "semver": "5.5.0",
     "status-board": "1.1.20",
     "tracer": "0.8.11",
     "underscore": "1.8.3",
