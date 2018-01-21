@@ -1,4 +1,5 @@
-import caporal from 'caporal';
+// tslint:disable-next-line import-name
+import _caporal from 'caporal';
 import { readFileSync } from 'jsonfile';
 import * as path from 'path';
 
@@ -10,7 +11,11 @@ import {
   start,
 } from './cli/commands';
 
-const pkg = readFileSync(path.normalize(path.join(__dirname, '../package.json')));
+type caporalClass = typeof _caporal;
+// tslint:disable-next-line no-var-requires
+const caporal: caporalClass = require('caporal');
+
+const pkg = JSON.parse(readFileSync(path.normalize(path.join(__dirname, '../package.json'))));
 
 caporal
   .version(pkg.version)

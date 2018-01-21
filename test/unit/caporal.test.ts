@@ -3,10 +3,11 @@ import caporal from '../../src/caporal';
 jest.mock('jsonfile', () => {
   return {
     readFileSync: jest.fn(() => {
-      return {
-        description: 'Mocked description',
-        version: '1.0.0',
+      const fakeJson = {
+        "version": "1.0.0",
+        "description": "Mocked description"
       };
+      return JSON.stringify(fakeJson);
     }),
   };
 });
