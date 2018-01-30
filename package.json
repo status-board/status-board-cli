@@ -60,7 +60,7 @@
     "@types/mkdirp": "0.5.2",
     "@types/node": "9.4.0",
     "@types/sanitize-filename": "1.1.28",
-    "@types/semver": "5.4.0",
+    "@types/semver": "5.5.0",
     "@types/underscore": "1.8.7",
     "@types/winston": "2.3.7",
     "@types/xtend": "4.0.2",
