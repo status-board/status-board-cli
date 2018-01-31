@@ -4302,9 +4302,9 @@ stack-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
 
-status-board@1.1.22:
-  version "1.1.22"
-  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.22.tgz#b9392899e027d6a4d837077cbb814e938bb9e842"
+status-board@1.1.23:
+  version "1.1.23"
+  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.23.tgz#5f95e06db2e0cd9f3bb2874f72904e57a216c086"
   dependencies:
     async "2.6.0"
     body-parser "1.18.2"
