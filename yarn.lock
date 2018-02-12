@@ -764,7 +764,7 @@ center-align@^0.1.1:
     align-text "^0.1.3"
     lazy-cache "^1.0.3"
 
-chalk@*, chalk@2.3.0, chalk@^2.0.0, chalk@^2.0.1, chalk@^2.3.0:
+chalk@*, chalk@^2.0.0, chalk@^2.0.1, chalk@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.3.0.tgz#b5ea48efc9c1793dccc9b4767c93914d3f2d52ba"
   dependencies:
@@ -4315,13 +4315,13 @@ stack-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
 
-status-board@1.1.25:
-  version "1.1.25"
-  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.25.tgz#968f67cabc71098fa21d136d91f6d9a754f01925"
+status-board@1.1.26:
+  version "1.1.26"
+  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.26.tgz#d9c86d6473028ccd849911fa266ff139eb39e553"
   dependencies:
     async "2.6.0"
     body-parser "1.18.2"
-    chalk "2.3.0"
+    chalk "2.3.1"
     compression "1.7.1"
     css "2.2.1"
     debug "3.1.0"
