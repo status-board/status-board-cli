@@ -4315,9 +4315,9 @@ stack-utils@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/stack-utils/-/stack-utils-1.0.1.tgz#d4f33ab54e8e38778b0ca5cfd3b3afb12db68620"
 
-status-board@1.1.26:
-  version "1.1.26"
-  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.26.tgz#d9c86d6473028ccd849911fa266ff139eb39e553"
+status-board@1.1.27:
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/status-board/-/status-board-1.1.27.tgz#32f1a1273be95091e05655b1fd7d778706f62f02"
   dependencies:
     async "2.6.0"
     body-parser "1.18.2"
@@ -4338,7 +4338,7 @@ status-board@1.1.26:
     semver "5.5.0"
     socket.io "2.0.4"
     stylus "0.54.5"
-    tracer "0.8.11"
+    tracer "0.8.12"
     traverse "0.6.6"
     underscore "1.8.3"
     winston "2.4.0"
@@ -4570,14 +4570,6 @@ tr46@^1.0.0:
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-1.0.1.tgz#a8b13fd6bfd2489519674ccde55ba3693b706d09"
   dependencies:
     punycode "^2.1.0"
-
-tracer@0.8.11:
-  version "0.8.11"
-  resolved "https://registry.yarnpkg.com/tracer/-/tracer-0.8.11.tgz#5941c67404410d86665b75bba68bb1c9d2c3cacd"
-  dependencies:
-    colors "1.1.2"
-    dateformat "2.0.0"
-    tinytim "0.1.1"
 
 tracer@0.8.12:
   version "0.8.12"
