@@ -488,11 +488,51 @@ Program {
   "_description": "Mocked description",
   "_helper": Help {
     "_customHelp": Object {
-      "generate": "atlasboard generate widget mywidget",
-      "install": "status-board install",
-      "list": "status-board list",
-      "new": "atlasboard new mywallboard",
-      "start": "my help for the order command",
+      "generate": Array [
+        Array [
+          "atlasboard generate widget mywidget",
+          Object {
+            "indent": true,
+            "name": "",
+          },
+        ],
+      ],
+      "install": Array [
+        Array [
+          "status-board install",
+          Object {
+            "indent": true,
+            "name": "",
+          },
+        ],
+      ],
+      "list": Array [
+        Array [
+          "status-board list",
+          Object {
+            "indent": true,
+            "name": "",
+          },
+        ],
+      ],
+      "new": Array [
+        Array [
+          "atlasboard new mywallboard",
+          Object {
+            "indent": true,
+            "name": "",
+          },
+        ],
+      ],
+      "start": Array [
+        Array [
+          "my help for the order command",
+          Object {
+            "indent": true,
+            "name": "",
+          },
+        ],
+      ],
     },
     "_program": [Circular],
   },
