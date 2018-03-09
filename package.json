@@ -48,7 +48,7 @@
     "status-board": "1.1.29",
     "tracer": "0.8.12",
     "underscore": "1.8.3",
-    "winston": "2.4.0",
+    "winston": "2.4.1",
     "xtend": "4.0.1"
   },
   "devDependencies": {
