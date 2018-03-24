@@ -1,5 +1,5 @@
 // tslint:disable-next-line import-name
-import _caporal from 'caporal';
+import * as _caporal from 'caporal';
 import { readFileSync } from 'jsonfile';
 import * as path from 'path';
 
