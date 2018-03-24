@@ -1,4 +1,4 @@
 #!/usr/bin/env node
-const caporal = require('../lib/caporal').default;
+var caporal = require('../lib/caporal').default;
 
 caporal.parse(process.argv);
