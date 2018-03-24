@@ -43,6 +43,7 @@
     "ejs": "2.5.7",
     "jsonfile": "4.0.0",
     "mkdirp": "0.5.1",
+    "read-package-json": "2.0.13",
     "sanitize-filename": "1.6.1",
     "semver": "5.5.0",
     "status-board": "1.1.30",
