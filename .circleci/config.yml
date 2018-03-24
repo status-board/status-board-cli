@@ -190,15 +190,12 @@ workflows:
       - test-node-9:
           requires:
             - tslint
-      - coverage:
+      - build-typescript:
           requires:
             - test-node-6
             - test-node-7
             - test-node-8
             - test-node-9
-      - build-typescript:
-          requires:
-            - coverage
       - semantic-release:
           requires:
             - build-typescript
