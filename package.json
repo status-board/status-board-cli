@@ -56,7 +56,7 @@
     "@types/async": "2.0.48",
     "@types/chalk": "2.2.0",
     "@types/debug": "0.0.30",
-    "@types/ejs": "2.5.0",
+    "@types/ejs": "2.5.1",
     "@types/jsonfile": "4.0.1",
     "@types/mkdirp": "0.5.2",
     "@types/node": "9.6.1",
