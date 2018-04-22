@@ -48,7 +48,7 @@
     "semver": "5.5.0",
     "status-board": "1.1.35",
     "tracer": "0.8.12",
-    "underscore": "1.8.3",
+    "underscore": "1.9.0",
     "winston": "3.0.0-rc3",
     "xtend": "4.0.1"
   },
