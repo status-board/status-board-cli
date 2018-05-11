@@ -1,20 +1,30 @@
 module.exports = {
-  "globals": {
+  bail: true,
+  clearMocks: true,
+  collectCoverageFrom: [
+    "src/**/*.{ts,tsx}",
+  ],
+  coveragePathIgnorePatterns: [
+    "<rootDir>/test/helpers/",
+    "<rootDir>/node_modules/",
+  ],
+  globals: {
     "ts-jest": {
-      "tsConfigFile": "tsconfig.json"
+      "tsConfigFile": "tsconfig.json",
     }
   },
-  "transform": {
-    "^.+\\.(ts|tsx)$": "./node_modules/ts-jest/preprocessor.js"
-  },
-  "testMatch": [
-    "**/test/**/*.test.(ts|tsx|js)"
-  ],
-  "setupFiles": [],
-  "moduleFileExtensions": [
+  moduleFileExtensions: [
     "ts",
     "tsx",
-    "js"
+    "js",
+    "jsx",
+    "json",
+    "node",
   ],
-  "clearMocks": true
+  testMatch: [
+    "<rootDir>/test/**/*.(test|spec).(ts|tsx|js)",
+  ],
+  transform: {
+    "^.+\\.tsx?$": "ts-jest",
+  },
 };
