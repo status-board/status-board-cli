@@ -1,4 +1,4 @@
-import * as path from "path";
+import * as path from 'path';
 import { installDependencies } from '../package-dependency-manager';
 
 export function install(options: any, logger: any, callback: any) {

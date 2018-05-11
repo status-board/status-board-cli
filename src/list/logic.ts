@@ -1,5 +1,5 @@
-import * as _ from 'underscore';
 import * as async from 'async';
+import * as _ from 'underscore';
 import { getByPackage } from '../item-manager';
 
 export function list(packagesPath: any, logger: any, callback: any) {
