@@ -3,7 +3,7 @@
   "version": "0.0.0-development",
   "description": "CLI utility for status board",
   "main": "./lib/caporal.js",
-  "types": "./lib/status-board.d.ts",
+  "types": "./lib/caporal.d.ts",
   "bin": {
     "status-board-cli": "./bin/cli.js"
   },
@@ -12,7 +12,6 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./bin/www",
-    "storybook": "start-storybook -p 9001 -c .storybook",
     "clean": "rimraf lib coverage",
     "commit": "git-cz",
     "commitmsg": "opt --in commit-msg --exec \"commitlint -e $GIT_PARAMS\"",
@@ -43,7 +42,9 @@
     "verify:tscheck": "types-checker"
   },
   "keywords": [
-    "react"
+    "cli",
+    "generator",
+    "status-board"
   ],
   "bugs": {
     "url": "https://github.com/jameswlane/status-board-cli/issues"
