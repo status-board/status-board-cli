@@ -1,9 +1,15 @@
 version: 2
 
+defaultFilters: &defaultFilters
+  filters:
+    branches:
+      only:
+        - master
+
 docker_defaults: &docker_defaults
   docker:
     - image: circleci/node:8
-  working_directory: ~/project/status-board-cli
+  working_directory: ~/project/status-board
 
 attach_workspace: &attach_workspace
   attach_workspace:
@@ -42,7 +48,7 @@ install_steps: &install_steps
     - persist_to_workspace:
         root: ~/project
         paths:
-          - status-board-cli
+          - status-board
 
 test_steps: &test_steps
   steps:
@@ -95,7 +101,7 @@ jobs:
           path: reports/tslint
 
   test-node-6:
-    working_directory: ~/status-board-cli
+    working_directory: ~/status-board
     docker:
       - image: circleci/node:6
     <<: *test_steps
@@ -105,9 +111,15 @@ jobs:
     <<: *test_steps
 
   test-node-9:
-    working_directory: ~/status-board-cli
+    working_directory: ~/status-board
     docker:
       - image: circleci/node:9
+    <<: *test_steps
+
+  test-node-10:
+    working_directory: ~/status-board
+    docker:
+      - image: circleci/node:10
     <<: *test_steps
 
   coverage:
@@ -145,10 +157,11 @@ jobs:
       - persist_to_workspace:
           root: ~/project
           paths:
-            - status-board-cli
+            - status-board
 
   semantic-release:
     <<: *docker_defaults
+    <<: *defaultFilters
     steps:
       - *attach_workspace
       - run:
@@ -168,24 +181,39 @@ workflows:
             - install
       - nsp:
           requires:
-            - npmvet
+            - install
       - tslint:
           requires:
-            - nsp
+            - install
       - test-node-6:
           requires:
+            - npmvet
+            - nsp
             - tslint
       - test-node-8:
           requires:
+            - npmvet
+            - nsp
             - tslint
       - test-node-9:
           requires:
+            - npmvet
+            - nsp
             - tslint
-      - build-typescript:
+      - test-node-10:
+          requires:
+            - npmvet
+            - nsp
+            - tslint
+      - coverage:
           requires:
             - test-node-6
             - test-node-8
             - test-node-9
+            - test-node-10
+      - build-typescript:
+          requires:
+            - coverage
       - semantic-release:
           requires:
             - build-typescript
