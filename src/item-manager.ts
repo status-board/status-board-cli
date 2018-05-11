@@ -59,10 +59,10 @@ export function resolveCandidates(items: any, name: any, itemType: any, extensio
     const itemParsedName = name.split('#')[1];
     // package/jobs/job1/job1.js
     // tslint:disable-next-line max-line-length
-    searchCriteria = path.join(packageName, this.resolveLocation(itemParsedName, itemType, extension));
+    searchCriteria = path.join(packageName, resolveLocation(itemParsedName, itemType, extension));
   } else {
     // jobs/job1/job1.js
-    searchCriteria = this.resolveLocation(name, itemType, extension);
+    searchCriteria = resolveLocation(name, itemType, extension);
   }
 
   searchCriteria = path.sep + searchCriteria;
@@ -84,12 +84,12 @@ export function resolveCandidates(items: any, name: any, itemType: any, extensio
  */
 // tslint:disable-next-line max-line-length
 export function getFirst(packagesPath: any, itemName: any, itemType: any, extension: any, callback: any) {
-  this.get(packagesPath, itemType, extension, (err: any, items: any) => {
+  get(packagesPath, itemType, extension, (err: any, items: any) => {
     if (err) {
       return callback(err);
     }
 
-    const candidates = this.resolveCandidates(items, itemName, itemType, extension);
+    const candidates = resolveCandidates(items, itemName, itemType, extension);
     callback(null, candidates.length ? candidates[0] : null);
   });
 }
@@ -103,7 +103,7 @@ export function getFirst(packagesPath: any, itemName: any, itemType: any, extens
  * @param {function} callback : callback
  */
 export function get(packagesPath: any, itemType: any, extension: any, callback: any) {
-  this.getByPackage(packagesPath, itemType, extension, (err: any, results: any) => {
+  getByPackage(packagesPath, itemType, extension, (err: any, results: any) => {
     if (err) {
       return callback(err);
     }
