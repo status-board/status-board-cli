@@ -2,13 +2,11 @@ import caporal = require('caporal');
 import { readFileSync } from 'jsonfile';
 import * as path from 'path';
 
-import {
-  generate,
-  install,
-  list,
-  newProject,
-  start,
-} from './cli/commands';
+import { generate } from './generate';
+import { install } from './install';
+import { list } from './list';
+import { newProject } from './new-project';
+import { start } from './start';
 
 const pkg = JSON.parse(readFileSync(path.normalize(path.join(__dirname, '../package.json'))));
 
