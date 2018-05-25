@@ -1,11 +1,24 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "lib",
     "sourceMap": true,
     "noImplicitAny": true,
     "module": "commonjs",
-    "target": "es2016",
-    "jsx": "react"
+    "target": "es2015",
+    "declaration": true,
+    "lib": [
+      "es6"
+    ],
+    "moduleResolution": "node",
+    "pretty": true,
+    "removeComments": true,
+    "strict": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "./typings/*.d.ts",

@@ -34,8 +34,7 @@ export function scaffold(templateSourceFolder: any, destinationFolder: any, opti
   // based on http://stackoverflow.com/questions/13786160/copy-folder-recursively-in-node-js
   const copyRecursiveSync = (src: any, dest: any) => {
     const exists = fs.existsSync(src);
-    const stats = exists && fs.statSync(src);
-    const isDirectory = exists && stats.isDirectory();
+    const isDirectory = exists ? fs.statSync(src).isDirectory() : false;
     if (exists && isDirectory) {
       debugLog('creating directory', dest);
       fs.mkdirSync(dest);

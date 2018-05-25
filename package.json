@@ -3,6 +3,7 @@
   "version": "0.0.0-development",
   "description": "CLI utility for status board",
   "main": "./lib/caporal.js",
+  "types": "./lib/caporal.d.ts",
   "bin": {
     "status-board-cli": "./bin/cli.js"
   },
@@ -10,26 +11,40 @@
   "author": "James W. Lane <james.w.lane@mac.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node ./bin/www",
+    "clean": "rimraf lib coverage",
+    "commit": "git-cz",
+    "commitmsg": "opt --in commit-msg --exec \"commitlint -e $GIT_PARAMS\"",
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate",
+    "coverage:report": "coveralls",
+    "precommit": "lint-staged && opt --in pre-commit --exec \"yarn verify\"",
+    "semantic-release": "semantic-release",
+    "setup": "npm i -g npmvet david nsp depcheck types-checker commitizen semantic-release-cli all-contributors-cli",
     "test": "jest --coverage",
-    "test:ci": "jest --maxWorkers=4",
-    "test:coverage:ci": "jest --coverage --maxWorkers=4",
+    "test:ci": "jest --ci --maxWorkers=4",
+    "test:coverage:ci": "jest --ci --maxWorkers=4 --coverage --testResultsProcessor=\"jest-junit\"",
     "test:coverage:codecov": "codecov",
     "test:watch": "jest --watch",
     "ts:build": "tsc",
     "ts:watch": "tsc -w",
-    "tslint": "tslint --config tslint.json --project tsconfig.json \"src/**/*.ts\"",
-    "tslint:fix": "tslint --config tslint.json --project tsconfig.json --fix \"src/**/*.ts\"",
+    "tslint": "tslint --config tslint.json \"src/**/*.ts\"",
+    "tslint:ci": "tslint --config tslint.json --format junit --out reports/tslint/tslint-results.xml \"src/**/*.ts\"",
+    "tslint:fix": "tslint --config tslint.json --fix \"src/**/*.ts\"",
     "verify": "yarn verify:npmvet && yarn verify:david && yarn verify:nsp && yarn verify:tscheck && yarn tslint && yarn test",
-    "verify:npmvet": "npmvet --renderer ci --strict",
-    "verify:david": "david",
-    "verify:nsp": "nsp check --output summary",
+    "verify:offline": "yarn verify:npmvet && yarn tslint && yarn test",
+    "verify:circleci": "circleci config validate -c .circleci/config.yml",
+    "verify:ci": "yarn verify:npmvet && yarn verify:nsp && yarn test:ci",
     "verify:check": "depcheck",
-    "verify:tscheck": "types-checker",
-    "setup": "npm i -g npmvet david nsp depcheck types-checker commitizen semantic-release-cli",
-    "semantic-release": "semantic-release"
+    "verify:david": "david",
+    "verify:npmvet": "npmvet --renderer ci --strict",
+    "verify:nsp": "nsp check --output summary",
+    "verify:tscheck": "types-checker"
   },
   "keywords": [
-    "react"
+    "cli",
+    "generator",
+    "status-board"
   ],
   "bugs": {
     "url": "https://github.com/jameswlane/status-board-cli/issues"
@@ -38,40 +53,51 @@
   "dependencies": {
     "async": "2.6.0",
     "caporal": "0.10.0",
-    "chalk": "2.4.0",
+    "chalk": "2.4.1",
     "debug": "3.1.0",
-    "ejs": "2.5.9",
+    "ejs": "2.6.1",
     "jsonfile": "4.0.0",
     "mkdirp": "0.5.1",
     "read-package-json": "2.0.13",
     "sanitize-filename": "1.6.1",
     "semver": "5.5.0",
-    "status-board": "1.1.38",
-    "tracer": "0.8.12",
+    "status-board": "1.1.40",
+    "tracer": "0.8.15",
     "underscore": "1.9.0",
     "winston": "3.0.0-rc3",
     "xtend": "4.0.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "6.2.0",
+    "@commitlint/config-conventional": "6.1.3",
     "@types/async": "2.0.49",
     "@types/chalk": "2.2.0",
+    "@types/chance": "1.0.0",
     "@types/debug": "0.0.30",
     "@types/ejs": "2.5.1",
+    "@types/jest": "22.2.3",
     "@types/jsonfile": "4.0.1",
     "@types/mkdirp": "0.5.2",
-    "@types/node": "9.6.6",
+    "@types/node": "8.10.10",
     "@types/sanitize-filename": "1.1.28",
     "@types/semver": "5.5.0",
     "@types/underscore": "1.8.8",
     "@types/winston": "2.3.9",
     "@types/xtend": "4.0.2",
-    "codecov": "3.0.1",
-    "coveralls": "3.0.0",
+    "all-contributors-cli": "4.11.1",
+    "chance": "1.0.16",
+    "codecov": "3.0.2",
+    "commitizen": "2.9.6",
+    "coveralls": "3.0.1",
     "cz-conventional-changelog": "2.1.0",
     "jest": "22.4.3",
-    "semantic-release": "15.1.7",
-    "ts-jest": "22.4.4",
-    "tslint": "5.9.1",
+    "jest-junit": "3.7.0",
+    "lint-staged": "7.1.0",
+    "opt-cli": "1.6.0",
+    "rimraf": "2.6.2",
+    "semantic-release": "15.4.1",
+    "ts-jest": "22.4.6",
+    "tslint": "5.10.0",
     "tslint-config-airbnb": "5.8.0",
     "typescript": "2.8.3"
   },
@@ -79,5 +105,19 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "jest-junit": {
+    "output": "./ts-test-results.xml"
+  },
+  "tscheck": {
+    "exclude": [
+      "chalk",
+      "moment"
+    ]
+  },
+  "david": {
+    "ignore": [
+      "@types/node"
+    ]
   }
 }
