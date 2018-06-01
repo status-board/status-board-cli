@@ -63,7 +63,7 @@
     "semver": "5.5.0",
     "status-board": "1.1.40",
     "tracer": "0.8.15",
-    "underscore": "1.9.0",
+    "underscore": "1.9.1",
     "winston": "3.0.0-rc3",
     "xtend": "4.0.1"
   },
