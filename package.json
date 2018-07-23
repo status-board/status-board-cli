@@ -64,7 +64,7 @@
     "sanitize-filename": "1.6.1",
     "semver": "5.5.0",
     "status-board": "1.1.41",
-    "snyk": "^1.88.0"
+    "snyk": "1.89.0",
     "tracer": "0.9.1",
     "underscore": "1.9.1",
     "winston": "3.0.0",
