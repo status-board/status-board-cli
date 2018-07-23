@@ -61,7 +61,7 @@
     "read-package-json": "2.0.13",
     "sanitize-filename": "1.6.1",
     "semver": "5.5.0",
-    "status-board": "1.1.40",
+    "status-board": "1.1.41",
     "tracer": "0.9.1",
     "underscore": "1.9.1",
     "winston": "3.0.0",
