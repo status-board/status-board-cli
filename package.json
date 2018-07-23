@@ -39,7 +39,9 @@
     "verify:david": "david",
     "verify:npmvet": "npmvet --renderer ci --strict",
     "verify:nsp": "nsp check --output summary",
-    "verify:tscheck": "types-checker"
+    "verify:tscheck": "types-checker",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "keywords": [
     "cli",
@@ -62,6 +64,7 @@
     "sanitize-filename": "1.6.1",
     "semver": "5.5.0",
     "status-board": "1.1.41",
+    "snyk": "^1.88.0"
     "tracer": "0.9.1",
     "underscore": "1.9.1",
     "winston": "3.0.0",
@@ -120,5 +123,6 @@
     "ignore": [
       "@types/node"
     ]
-  }
+  },
+  "snyk": true
 }
