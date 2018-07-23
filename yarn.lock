@@ -6285,6 +6285,15 @@ tracer@0.8.15:
     mkdirp "^0.5.1"
     tinytim "0.1.1"
 
+tracer@0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/tracer/-/tracer-0.9.1.tgz#e24139b6d2ccc2eb3b0ef535354d77575be208c4"
+  dependencies:
+    colors "1.2.3"
+    dateformat "3.0.3"
+    mkdirp "^0.5.1"
+    tinytim "0.1.1"
+
 traverse@0.6.6, traverse@~0.6.6:
   version "0.6.6"
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
