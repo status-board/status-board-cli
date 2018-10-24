@@ -31,8 +31,29 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
+* [`status-board generate [FILE]`](#status-board-generate-file)
 * [`status-board hello [FILE]`](#status-board-hello-file)
 * [`status-board help [COMMAND]`](#status-board-help-command)
+* [`status-board install [FILE]`](#status-board-install-file)
+* [`status-board list [FILE]`](#status-board-list-file)
+* [`status-board new [FILE]`](#status-board-new-file)
+* [`status-board start [FILE]`](#status-board-start-file)
+
+## `status-board generate [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ status-board generate [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/generate.ts](https://github.com/jameswlane/status-board-cli/blob/v0.0.0/src/commands/generate.ts)_
 
 ## `status-board hello [FILE]`
 
@@ -70,4 +91,68 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.3/src/commands/help.ts)_
+
+## `status-board install [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ status-board install [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/install.ts](https://github.com/jameswlane/status-board-cli/blob/v0.0.0/src/commands/install.ts)_
+
+## `status-board list [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ status-board list [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/list.ts](https://github.com/jameswlane/status-board-cli/blob/v0.0.0/src/commands/list.ts)_
+
+## `status-board new [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ status-board new [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/new.ts](https://github.com/jameswlane/status-board-cli/blob/v0.0.0/src/commands/new.ts)_
+
+## `status-board start [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ status-board start [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/start.ts](https://github.com/jameswlane/status-board-cli/blob/v0.0.0/src/commands/start.ts)_
 <!-- commandsstop -->
