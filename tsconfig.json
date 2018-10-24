@@ -1,27 +1,15 @@
 {
   "compilerOptions": {
-    "outDir": "lib",
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "commonjs",
-    "target": "es2015",
     "declaration": true,
-    "lib": [
-      "es6"
-    ],
-    "moduleResolution": "node",
-    "pretty": true,
-    "removeComments": true,
+    "importHelpers": true,
+    "module": "commonjs",
+    "outDir": "lib",
+    "rootDir": "src",
     "strict": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "types": [
-      "node"
-    ]
+    "target": "es2017",
+    "composite": true
   },
   "include": [
-    "./typings/*.d.ts",
-    "./src/**/*"
+    "src/**/*"
   ]
 }
