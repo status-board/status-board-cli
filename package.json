@@ -85,7 +85,7 @@
     "@types/sanitize-filename": "1.1.28",
     "@types/semver": "5.5.0",
     "@types/underscore": "1.8.9",
-    "@types/winston": "2.3.9",
+    "@types/winston": "2.4.4",
     "@types/xtend": "4.0.2",
     "all-contributors-cli": "5.4.1",
     "babel-core": "6.26.3",
