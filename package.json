@@ -58,7 +58,7 @@
     "chalk": "2.4.1",
     "debug": "4.1.0",
     "ejs": "2.6.1",
-    "jsonfile": "4.0.0",
+    "jsonfile": "5.0.0",
     "mkdirp": "0.5.1",
     "read-package-json": "2.0.13",
     "sanitize-filename": "1.6.1",
