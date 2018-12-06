@@ -84,7 +84,7 @@
     "@types/node": "8.10.10",
     "@types/sanitize-filename": "1.1.28",
     "@types/semver": "5.5.0",
-    "@types/underscore": "1.8.8",
+    "@types/underscore": "1.8.9",
     "@types/winston": "2.3.9",
     "@types/xtend": "4.0.2",
     "all-contributors-cli": "5.3.0",
