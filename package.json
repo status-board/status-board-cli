@@ -76,7 +76,7 @@
     "@types/async": "2.0.50",
     "@types/chalk": "2.2.0",
     "@types/chance": "1.0.1",
-    "@types/debug": "0.0.30",
+    "@types/debug": "0.0.31",
     "@types/ejs": "2.6.1",
     "@types/jest": "23.3.10",
     "@types/jsonfile": "4.0.1",
