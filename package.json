@@ -54,7 +54,7 @@
   "homepage": "https://github.com/jameswlane/status-board-cli#readme",
   "dependencies": {
     "async": "2.6.1",
-    "caporal": "0.10.0",
+    "caporal": "1.1.0",
     "chalk": "2.4.1",
     "debug": "4.1.0",
     "ejs": "2.6.1",
