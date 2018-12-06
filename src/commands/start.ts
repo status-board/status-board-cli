@@ -1,25 +1,36 @@
 import { Command, flags } from '@oclif/command';
 
 export default class Start extends Command {
-  public static description = 'describe the command here';
+  public static description = 'starts Status Board\'s server';
 
   public static flags = {
-    // flag with no value (-f, --force)
-    force: flags.boolean({ char: 'f' }),
-    help: flags.help({ char: 'h' }),
-    // flag with a value (-n, --name=VALUE)
-    name: flags.string({ char: 'n', description: 'name to print' }),
+    dashboard: flags.string({
+      char: 'd',
+      description: 'loads only dashboards matching',
+    }),
+    job: flags.string({
+      char: 'j',
+      description: 'runs only jobs matching \'myjob\'',
+    }),
+    noinstall: flags.boolean({
+      char: 'n',
+      description: 'skips npm package install (faster startup)',
+    }),
+
   };
 
-  public static args = [{ name: 'file' }];
+  public static args = [
+    {
+      description: 'runs atlasboard in port',
+      name: 'port',
+    },
+  ];
 
   public async run() {
     const { args, flags } = this.parse(Start);
 
-    const name = flags.name || 'world';
-    this.log(`hello ${name} from src/commands/start.ts`);
-    if (args.file && flags.force) {
-      this.log(`you input --force and --file: ${args.file}`);
-    }
+    this.log('Generate was called with:');
+    this.log(`Component: ${args.component}`);
+    this.log(`Name: ${args.name}`);
   }
 }
