@@ -1,4 +1,5 @@
 import { Command, flags } from '@oclif/command';
+import { start } from '../start';
 
 export default class Start extends Command {
   public static description = 'starts Status Board\'s server';
@@ -21,16 +22,25 @@ export default class Start extends Command {
 
   public static args = [
     {
-      description: 'runs atlasboard in port',
+      description: 'runs Status Board in port',
       name: 'port',
     },
   ];
 
   public async run() {
     const { args, flags } = this.parse(Start);
+    const options = {};
 
     this.log('Generate was called with:');
     this.log(`Component: ${args.component}`);
     this.log(`Name: ${args.name}`);
+    this.log('Command \'start\' called with:');
+    this.log('arguments: %j', args);
+    this.log('options: %j', options);
+    start(args, options, this.log, (error: any) => {
+      if (error) {
+        throw Error(error);
+      }
+    });
   }
 }

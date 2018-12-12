@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "license": "MIT",
+  "author": "Status Board",
+  "name": "your-dashboard-name-here",
+  "description": "A dashboard built for Status Board",
+  "version": "0.0.1",
+  "homepage": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "engines": {
+    "npm": "~2.0.0",
+    "node": ">=0.10"
+  },
+  "devDependencies": {
+    "mocha": "2.3.0"
+  },
+  "scripts": {
+    "start": "node start",
+    "test": "find . -regex '.*/jobs/.*/test/.*.js' | xargs mocha"
+  }
+}
