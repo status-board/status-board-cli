@@ -18,6 +18,11 @@ CLI utility for Status Board
 # Usage
 <!-- usage -->
 ```sh-session
+$ npx status-board COMMAND
+running command...
+```
+To install
+```sh-session
 $ npm install -g status-board-cli
 $ status-board COMMAND
 running command...
