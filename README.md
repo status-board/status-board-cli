@@ -32,7 +32,6 @@ USAGE
 # Commands
 <!-- commands -->
 * [`status-board generate [FILE]`](#status-board-generate-file)
-* [`status-board hello [FILE]`](#status-board-hello-file)
 * [`status-board help [COMMAND]`](#status-board-help-command)
 * [`status-board install [FILE]`](#status-board-install-file)
 * [`status-board list [FILE]`](#status-board-list-file)
@@ -54,26 +53,6 @@ OPTIONS
 ```
 
 _See code: [src/commands/generate.ts](https://github.com/jameswlane/status-board-cli/blob/v0.0.0/src/commands/generate.ts)_
-
-## `status-board hello [FILE]`
-
-describe the command here
-
-```
-USAGE
-  $ status-board hello [FILE]
-
-OPTIONS
-  -f, --force
-  -h, --help       show CLI help
-  -n, --name=name  name to print
-
-EXAMPLE
-  $ status-board hello
-  hello world from ./src/hello.ts!
-```
-
-_See code: [src/commands/hello.ts](https://github.com/jameswlane/status-board-cli/blob/v0.0.0/src/commands/hello.ts)_
 
 ## `status-board help [COMMAND]`
 
