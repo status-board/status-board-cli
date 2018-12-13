@@ -4,7 +4,7 @@ plugins:
     enabled: true
     config:
       languages:
-      - javascript
+        - javascript
   fixme:
     enabled: true
   git-legal:

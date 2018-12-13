@@ -1,17 +1,86 @@
 {
   "name": "status-board-cli",
-  "version": "0.0.0-development",
-  "description": "CLI utility for status board",
-  "main": "./lib/caporal.js",
-  "types": "./lib/caporal.d.ts",
+  "description": "CLI utility for Status Board",
+  "version": "0.0.0",
+  "author": "James W. Lane @jameswlane",
   "bin": {
-    "status-board-cli": "./bin/cli.js"
+    "status-board": "./bin/run"
   },
-  "repository": "git@github.com:jameswlane/status-board-cli.git",
-  "author": "James W. Lane <james.w.lane@mac.com>",
+  "bugs": "https://github.com/jameswlane/status-board-cli/issues",
+  "dependencies": {
+    "@oclif/command": "1.5.6",
+    "@oclif/config": "1.9.0",
+    "@oclif/plugin-help": "2.1.4",
+    "async": "2.6.1",
+    "debug": "4.1.0",
+    "ejs": "2.6.1",
+    "mkdirp": "0.5.1",
+    "read-package-json": "2.0.13",
+    "sanitize-filename": "1.6.1",
+    "semver": "5.6.0",
+    "status-board": "1.1.45",
+    "tslib": "1.9.3",
+    "underscore": "1.9.1"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "1.19.5",
+    "@oclif/test": "1.2.2",
+    "@oclif/tslint": "3.1.1",
+    "@types/async": "2.0.50",
+    "@types/chai": "^4.1.7",
+    "@types/debug": "0.0.31",
+    "@types/ejs": "2.6.1",
+    "@types/mkdirp": "0.5.2",
+    "@types/node": "10.12.14",
+    "@types/sanitize-filename": "1.1.28",
+    "@types/semver": "5.5.0",
+    "@types/underscore": "1.8.9",
+    "all-contributors-cli": "5.4.1",
+    "chai": "^4.2.0",
+    "codecov": "3.1.0",
+    "commitizen": "3.0.5",
+    "cz-conventional-changelog": "2.1.0",
+    "globby": "8.0.1",
+    "jest": "23.6.0",
+    "jest-junit": "5.2.0",
+    "lint-staged": "8.1.0",
+    "opt-cli": "1.6.0",
+    "semantic-release": "15.12.5",
+    "snyk": "1.117.1",
+    "ts-jest": "23.10.5",
+    "ts-node": "7.0.1",
+    "tslint": "5.11.0",
+    "tslint-config-airbnb": "5.11.1",
+    "typescript": "3.2.2"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/jameswlane/status-board-cli",
+  "keywords": [
+    "oclif"
+  ],
   "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "status-board",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "jameswlane/status-board-cli",
   "scripts": {
-    "start": "node ./bin/www",
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "tslint -p test -t stylish",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "version": "oclif-dev readme && git add README.md",
     "clean": "rimraf lib coverage",
     "commit": "git-cz",
     "commitmsg": "opt --in commit-msg --exec \"commitlint -e $GIT_PARAMS\"",
@@ -21,12 +90,12 @@
     "precommit": "lint-staged && opt --in pre-commit --exec \"yarn verify\"",
     "semantic-release": "semantic-release",
     "setup": "npm i -g npmvet david nsp depcheck types-checker commitizen semantic-release-cli all-contributors-cli",
-    "test": "jest --coverage",
+    "test": "snyk test && jest --coverage",
     "test:ci": "jest --ci --maxWorkers=4",
     "test:coverage:ci": "jest --ci --maxWorkers=4 --coverage --testResultsProcessor=\"jest-junit\"",
     "test:coverage:codecov": "codecov",
     "test:watch": "jest --watch",
-    "ts:build": "tsc",
+    "ts:build": "tsc -b",
     "ts:watch": "tsc -w",
     "tslint": "tslint --config tslint.json \"src/**/*.ts\"",
     "tslint:ci": "tslint --config tslint.json --format junit --out reports/tslint/tslint-results.xml \"src/**/*.ts\"",
@@ -43,86 +112,10 @@
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"
   },
-  "keywords": [
-    "cli",
-    "generator",
-    "status-board"
-  ],
-  "bugs": {
-    "url": "https://github.com/jameswlane/status-board-cli/issues"
-  },
-  "homepage": "https://github.com/jameswlane/status-board-cli#readme",
-  "dependencies": {
-    "async": "2.6.1",
-    "caporal": "1.1.0",
-    "chalk": "2.4.1",
-    "debug": "4.1.0",
-    "ejs": "2.6.1",
-    "jsonfile": "5.0.0",
-    "mkdirp": "0.5.1",
-    "read-package-json": "2.0.13",
-    "sanitize-filename": "1.6.1",
-    "semver": "5.6.0",
-    "snyk": "1.116.0",
-    "status-board": "1.1.45",
-    "tracer": "0.9.6",
-    "underscore": "1.9.1",
-    "winston": "3.1.0",
-    "xtend": "4.0.1"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "7.2.1",
-    "@commitlint/config-conventional": "7.1.2",
-    "@types/async": "2.0.50",
-    "@types/chalk": "2.2.0",
-    "@types/chance": "1.0.1",
-    "@types/debug": "0.0.31",
-    "@types/ejs": "2.6.1",
-    "@types/jest": "23.3.10",
-    "@types/jsonfile": "4.0.1",
-    "@types/mkdirp": "0.5.2",
-    "@types/node": "8.10.10",
-    "@types/sanitize-filename": "1.1.28",
-    "@types/semver": "5.5.0",
-    "@types/underscore": "1.8.9",
-    "@types/winston": "2.4.4",
-    "@types/xtend": "4.0.2",
-    "all-contributors-cli": "5.4.1",
-    "babel-core": "6.26.3",
-    "chance": "1.0.18",
-    "codecov": "3.1.0",
-    "commitizen": "3.0.5",
-    "coveralls": "3.0.2",
-    "cz-conventional-changelog": "2.1.0",
-    "jest": "23.6.0",
-    "jest-junit": "5.2.0",
-    "lint-staged": "8.1.0",
-    "opt-cli": "1.6.0",
-    "rimraf": "2.6.2",
-    "semantic-release": "15.12.4",
-    "ts-jest": "23.10.5",
-    "tslint": "5.11.0",
-    "tslint-config-airbnb": "5.11.1",
-    "typescript": "3.2.1"
-  },
+  "types": "lib/index.d.ts",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "jest-junit": {
-    "output": "./ts-test-results.xml"
-  },
-  "tscheck": {
-    "exclude": [
-      "chalk",
-      "moment"
-    ]
-  },
-  "david": {
-    "ignore": [
-      "@types/node"
-    ]
-  },
-  "snyk": true
+  }
 }

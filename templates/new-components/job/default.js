@@ -4,9 +4,9 @@
  * Expected configuration:
  *
  * ## PLEASE ADD AN EXAMPLE CONFIGURATION FOR YOUR JOB HERE
- * { 
- *   myconfigKey : [ 
- *     { serverUrl : 'localhost' } 
+ * {
+ *   myconfigKey : [
+ *     { serverUrl : 'localhost' }
  *   ]
  * }
  */
@@ -46,9 +46,9 @@ module.exports = {
 
      - dependencies.easyRequest : a wrapper on top of the "request" module
      - dependencies.request : the popular http request module itself
-     - dependencies.logger : atlasboard logger interface
+     - dependencies.logger : Status Board logger interface
 
-     Check them all out: https://bitbucket.org/atlassian/atlasboard/raw/master/lib/job-dependencies/?at=master
+     Check them all out: https://github.com/jameswlane/status-board/raw/master/lib/job-dependencies/?at=master
 
      */
 
@@ -73,7 +73,7 @@ module.exports = {
      You can send data back to the widget anytime (ex: if you are hooked into a real-time data stream and
      don't want to depend on the jobCallback triggered by the scheduler to push data to widgets)
 
-     jobWorker.pushUpdate({data: { title: config.widgetTitle, html: 'loading...' }}); // on Atlasboard > 1.0
+     jobWorker.pushUpdate({data: { title: config.widgetTitle, html: 'loading...' }}); // on Status Board > 1.0
 
 
      4. USE OF JOB_CALLBACK

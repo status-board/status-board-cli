@@ -11,13 +11,13 @@ widget = {
     if (data.quotes.length > 0) {
       data.quotes.forEach(function (quote) {
         $content.append(
-            "<blockquote>" + quote.quote + "<cite>" + quote.author + "</cite></blockquote>"
+          "<blockquote>" + quote.quote + "<cite>" + quote.author + "</cite></blockquote>"
         );
       });
 
     } else {
       $content.append(
-          "<blockquote>NO QUOTES FOUND<blockquote>"
+        "<blockquote>NO QUOTES FOUND<blockquote>"
       );
     }
   }

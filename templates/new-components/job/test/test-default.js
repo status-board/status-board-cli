@@ -55,7 +55,7 @@ describe ('<%=name%> test', function(){
       };
 
       var config = {};
-      <%=name.replace(/-/g,"_")%>_SUT.onRun(config, mockedDependencies, function(err, data){
+    <%=name.replace(/-/g,"_")%>_SUT.onRun(config, mockedDependencies, function(err, data){
         assert.equal(data.html, 'hello from google', 'expected a different reply from google: ' + data.html);
         done();
       });

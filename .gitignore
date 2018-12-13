@@ -1,21 +1,10 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Coverage directory used by tools like istanbul
-coverage
-
-# Compiled source
-lib
-
-# Dependency directories
-node_modules/
-
-# JetBrains settings
+*-debug.log
+*-error.log
+/.nyc_output
+/dist
+/lib
+/tmp
+node_modules
 .idea
-
-# macOS
 .DS_Store
+coverage

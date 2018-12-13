@@ -31,7 +31,7 @@ module.exports = {
 
       var result = [];
       _.first(events, maxEntries).forEach(function (event) {
-          result.push({startDate: formatDate(event.start), endDate: formatDate(event.end), summary: event.summary});
+        result.push({startDate: formatDate(event.start), endDate: formatDate(event.end), summary: event.summary});
       });
 
       jobCallback(null, {events: result, title: config.widgetTitle});

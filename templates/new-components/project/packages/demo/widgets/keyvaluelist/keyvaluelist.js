@@ -11,10 +11,10 @@ widget = {
     if (data.issues.length) {
       data.issues.forEach(function (issue) {
         $content.append(
-            "<div class='item-container'>" +
-              "<div class='issue'>" + issue.issueType + "</div>" +
-              "<div class='count'>" + issue.frequency + "</div>" +
-            "</div>"
+          "<div class='item-container'>" +
+          "<div class='issue'>" + issue.issueType + "</div>" +
+          "<div class='count'>" + issue.frequency + "</div>" +
+          "</div>"
         );
       })
     }

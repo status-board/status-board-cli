@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import * as fs from 'fs';
 import * as path from 'path';
-import { areValidPathElements, directoryHasAtlasBoardProject, scaffold } from '../utilities';
+import { areValidPathElements, directoryHasStatusBoardProject, scaffold } from '../utilities';
 
 export function generate(
   projectDir: any,
@@ -22,11 +22,12 @@ export function generate(
   const itemsToGenerate = ['widget', 'dashboard', 'job'];
   if (itemsToGenerate.indexOf(itemType) === -1) {
     // tslint:disable-next-line max-line-length
-    return callback('Invalid generator ' + itemType + '\nUse one of: ' + itemsToGenerate.join(', '));
+    return callback(`Invalid generator ${itemType}
+Use one of: ${itemsToGenerate.join(', ')}`);
   }
 
   // Assert a project already exists here
-  if (!directoryHasAtlasBoardProject(projectDir)) {
+  if (!directoryHasStatusBoardProject(projectDir)) {
     // tslint:disable-next-line max-line-length
     return callback('It seems that no project exists here yet. Please navigate to your project\'s root directory, or generate one first.');
   }
@@ -34,7 +35,7 @@ export function generate(
   // Assert name given
   if (!itemName) {
     // tslint:disable-next-line max-line-length
-    return callback('ERROR: No ' + itemType + ' name provided. Please try again with a name after the generate parameter');
+    return callback(`ERROR: No ${itemType} name provided. Please try again with a name after the generate parameter`);
   }
 
   // Assert no such item exists there yet
@@ -46,11 +47,11 @@ export function generate(
 
   if (itemType === 'dashboard') { // all dashboards files are stored within the dashboards folder
     src = path.join(templateFolder, 'dashboard', 'default.json');
-    target = path.join(destPackageLocation, 'dashboards', itemName + '.json');
+    target = path.join(destPackageLocation, 'dashboards', `${itemName}.json`);
   } else {
 
     src = path.join(templateFolder, itemType);
-    target = path.join(path.join(destPackageLocation, itemType + 's'), itemName);
+    target = path.join(path.join(destPackageLocation, `${itemType}s`), itemName);
 
     options = {
       data: {
@@ -58,17 +59,18 @@ export function generate(
       },
       engine: 'ejs',
       replace: {
-        'default.js': itemName + '.js',
-        'widget.': itemName + '.',
+        'default.js': `${itemName}.js`,
+        'widget.': `${itemName}.`,
       },
     };
   }
 
   if (fs.existsSync(target)) {
-    return callback('ERROR: This ' + itemType + ' already seems to exist at ' + target);
+    return callback(`ERROR: This ${itemType} already seems to exist at ${target}`);
   }
 
-  logger.log('\nCreating new %s at %s...', itemType, target);
+  logger('\nCreating new %s at %s...', itemType, target);
   scaffold(src, target, options, callback);
-  logger.log(chalk.green('SUCCESS !!') + '\n');
+  logger(`${chalk.green('SUCCESS !!')}
+`);
 }

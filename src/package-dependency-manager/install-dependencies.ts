@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import * as _ from 'underscore';
 import { checkPackagesFolder } from './check-packages-folder';
 import {
-  checkValidIfAtlasboardVersionForPackage,
-} from './check-valid-if-atlasboard-version-for-package';
+  checkValidIfStatusBoardVersionForPackage,
+} from './check-valid-if-status-board-version-for-package';
 import { install } from './install';
 
 export function installDependencies(packagesPath: any, callback: any) {
@@ -16,7 +16,7 @@ export function installDependencies(packagesPath: any, callback: any) {
 
     if (results) {
       const paths = _.flatten(results);
-      async.eachSeries(paths, checkValidIfAtlasboardVersionForPackage, (seriesError: any) => {
+      async.eachSeries(paths, checkValidIfStatusBoardVersionForPackage, (seriesError: any) => {
         if (seriesError) {
           return callback(seriesError);
         }

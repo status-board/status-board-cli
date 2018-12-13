@@ -1,6 +1,6 @@
 module.exports = {
   "*.ts": [
-    // "yarn tslint",
+    "npm run tslint:fix",
     "git add"
   ]
 };

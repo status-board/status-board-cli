@@ -1,6 +1,6 @@
 import * as path from 'path';
 
-export function isPathContainedInRoot(pathDir: any, root: any) {
+export function isPathContainedInRoot(pathDir: string, root: string) {
   if (typeof root !== 'string' || typeof pathDir !== 'string') {
     return false;
   }

@@ -3,18 +3,26 @@ import * as path from 'path';
 import sanitizeFilename = require('sanitize-filename');
 import { newProject as newProjectLogic } from './logic';
 
+interface IArguments {
+  app: string;
+  env: string;
+}
+
+type logger = (message?: string, ...args: any[]) => void;
+type callback = (error?: string) => void;
+
 /**
  * Creates a new dashboard
  *
  * @params args[0] dashboard directory
  */
-export function newProject(args: any, options: any, logger: any, callback: any) {
+export function newProject(args: IArguments, options: any, logger: logger, callback: callback) {
 
-  if (args.length < 1) {
-    callback('Missing arguments. Please use "atlasboard new <mywallboard>"');
+  if (args.app.length < 1) {
+    callback('Missing arguments. Please use "status-board new <mywallboard>"');
     return;
   }
-  const newDirectory = sanitizeFilename(args[0]);
+  const newDirectory = sanitizeFilename(args.app);
   const srcDir = path.join(__dirname, '../..', 'templates', 'new-components', 'project');
   const destDir = path.join(process.cwd(), newDirectory);
   return newProjectLogic(srcDir, destDir, logger, (error: any) => {
@@ -28,20 +36,23 @@ export function newProject(args: any, options: any, logger: any, callback: any) 
     const npmCommand = isWindows ? 'npm.cmd' : 'npm';
     const childProcess = require('child_process');
     const child = childProcess.spawn(npmCommand, ['install', '--production'], { stdio: 'inherit' });
-    logger.log('  Installing npm dependencies...');
+    logger('  Installing npm dependencies...');
     child.on('error', () => {
       // tslint:disable-next-line max-line-length
-      logger.log('\n  Error installing dependencies. Please run "npm install" inside the dashboard directory');
+      logger('\n  Error installing dependencies. Please run "npm install" inside the dashboard directory');
       callback('Error installing dependencies');
     });
     child.on('exit', () => {
-      logger.log([
-        chalk.green('\n  SUCCESS !!') + '\n',
-        '  New project "' + chalk.yellow(newDirectory) + '" successfully created. Now you can:\n',
-        chalk.gray('   1. cd ' + newDirectory),
+      logger([
+        `${chalk.green('\n  SUCCESS !!')}
+`,
+        `  New project "${chalk.yellow(newDirectory)}" successfully created. Now you can:
+`,
+        chalk.gray(`   1. cd ${newDirectory}`),
         chalk.gray('   2. npm install'),
-        chalk.gray('   3. start your server with `atlasboard start` (or `node start.js`)'),
-        chalk.gray('   4. browse http://localhost:3000') + '\n',
+        chalk.gray('   3. start your server with `npm run start` (or `node start.js`)'),
+        `${chalk.gray('   4. browse http://localhost:3000')}
+`,
         '   Optionally: import the Atlassian package (or any other package) by running:\n',
         chalk.gray('   git init'),
         // tslint:disable-next-line max-line-length

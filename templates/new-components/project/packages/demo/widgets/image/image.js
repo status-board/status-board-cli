@@ -5,7 +5,7 @@ widget = {
     }
 
     $('.content', el).html(
-        "<img class='featured-image' src='" + data.imageSrc + "'/>"
+      "<img class='featured-image' src='" + data.imageSrc + "'/>"
     );
 
   }

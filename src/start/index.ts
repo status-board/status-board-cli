@@ -2,7 +2,7 @@ import chalk from 'chalk';
 import { start as startLogic } from './logic';
 
 /**
- * When run in a project's base directory, starts the AtlasBoard server.
+ * When run in a project's base directory, starts the Status Board server.
  *
  * @params args[0] port (optional)
  * @params args --jobFilter filter by job (optional)
@@ -18,12 +18,12 @@ export function start(args: any, options: any, logger: any, callback: any) {
   }
 
   if (argsOptimistic.job) {
-    logger.log('Loading jobs matching ' + chalk.yellow(argsOptimistic.job) + ' only');
+    logger.log(`Loading jobs matching ${chalk.yellow(argsOptimistic.job)} only`);
     statusBoardOptions.filters.jobFilter = argsOptimistic.job;
   }
 
   if (argsOptimistic.dashboard) {
-    logger.log('Loading dashboards matching ' + chalk.yellow(argsOptimistic.dashboard) + ' only');
+    logger.log(`Loading dashboards matching ${chalk.yellow(argsOptimistic.dashboard)} only`);
     statusBoardOptions.filters.dashboardFilter = argsOptimistic.dashboard;
   }
   logger.log(chalk.gray('\nStarting server...'));

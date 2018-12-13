@@ -1,9 +1,9 @@
 {
   "private":true,
-  "license":"Apache License, Version 2.0",
+  "license":"MIT",
   "author":"Atlassian",
-  "name":"atlasboard-demo-package",
-  "description":"A demo package for AtlasBoard",
+  "name":"status-board-demo-package",
+  "description":"A demo package for Status Board",
   "version":"0.0.1",
   "homepage":"",
   "repository":{

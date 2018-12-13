@@ -1,11 +1,17 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { directoryHasAtlasBoardProject, isPathContainedInRoot } from '../utilities';
-import { scaffold } from '../utilities/scaffolding';
+import {
+  directoryHasStatusBoardProject,
+  isPathContainedInRoot,
+  scaffold,
+} from '../utilities';
 
 const validNewDirectoryExp = /^[a-zA-Z0-9_-]*$/;
 
-export function newProject(srcDir: any, destDir: any, logger: any, callback: any) {
+type logger = (message?: string, ...args: any[]) => void;
+type callback = (error?: string) => void;
+
+export function newProject(srcDir: string, destDir: string, logger: logger, callback: callback) {
 
   // Check for valid directory name
   const dirName = path.basename(destDir);
@@ -17,21 +23,21 @@ export function newProject(srcDir: any, destDir: any, logger: any, callback: any
     return callback('invalid directory');
   }
 
-  logger.log('\n  Generating a new AtlasBoard project at %s...', destDir.gray);
+  logger('\n  Generating a new Status Board project at %s...', destDir);
 
   const parentDir = path.dirname(destDir);
 
-  if (directoryHasAtlasBoardProject(parentDir)) {
+  if (directoryHasStatusBoardProject(parentDir)) {
     // tslint:disable-next-line max-line-length
-    return callback('You can not create an atlasboard inside a directory containing an atlasboard (at least we think you shouldn\'t)');
+    return callback('You can not create an Status Board inside a directory containing an Status Board (at least we think you shouldn\'t)');
   }
 
   if (fs.existsSync(destDir)) {
     // tslint:disable-next-line max-line-length
-    return callback('There is already a directory here called ' + destDir + '. Please choose a new name.');
+    return callback(`There is already a directory here called ${destDir}. Please choose a new name.`);
   }
 
-  logger.log('  Creating new wallboard ...');
+  logger('  Creating new wallboard ...');
   const options = {
     data: {
       name: dirName,

@@ -1,9 +1,9 @@
 {
   "private": true,
-  "license": "Apache License, Version 2.0",
-  "author": "AtlasBoard",
+  "license": "MIT",
+  "author": "Status Board",
   "name": "your-dashboard-name-here",
-  "description": "A dashboard built for AtlasBoard",
+  "description": "A dashboard built for Status Board",
   "version": "0.0.1",
   "homepage": "",
   "repository": {

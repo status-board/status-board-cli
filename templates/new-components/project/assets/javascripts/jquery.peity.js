@@ -85,7 +85,7 @@
       context.fill();
 
       $this.wrapInner($("<span>").hide()).append(canvas)
-  });
+    });
 
   peity.add(
     "line",
