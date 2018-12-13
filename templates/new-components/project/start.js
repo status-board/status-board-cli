@@ -7,8 +7,8 @@ try {
 } catch(e) {
   console.log('Ups!, no Status Board module could be found locally, so you can not run this script yet!');
   console.log('You can either:');
-  console.log(' a) install Status Board locally: `npm install Status Board --save`. Then rerun this script.');
-  console.log(' b) run this wallboard using the global Status Board binary: `Status Board start 3000`');
+  console.log(' a) install Status Board locally: `npm install status-board --save`. Then rerun this script.');
+  console.log(' b) run this wallboard using the global Status Board binary: `status-board start 3000`');
   process.exit();
 }
 
