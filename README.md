@@ -18,7 +18,7 @@ CLI utility for Status Board
 # Usage
 <!-- usage -->
 ```sh-session
-$ npx status-board COMMAND
+$ npx status-board-cli COMMAND
 running command...
 ```
 To install
