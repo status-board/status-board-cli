@@ -9,24 +9,25 @@ import { start as startLogic } from './logic';
  * @params args --dashboardFilter filter by dashboard (optional)
  */
 export function start(args: any, options: any, logger: any, callback: any) {
-  const port = isNaN(args[0]) ? 3000 : args[0];
+  const port = isNaN(args.port) ? 3000 : args.port;
   const statusBoardOptions: any = { port, filters: {}, install: true };
-  const argsOptimistic = require('optimist')(args).argv;
+  // const argsOptimistic = require('optimist')(args).argv;
 
-  if (argsOptimistic.noinstall) {
+  if (options.noinstall) {
+    logger('Do not install dependencies');
     statusBoardOptions.install = false;
   }
 
-  if (argsOptimistic.job) {
-    logger.log(`Loading jobs matching ${chalk.yellow(argsOptimistic.job)} only`);
-    statusBoardOptions.filters.jobFilter = argsOptimistic.job;
+  if (options.job) {
+    logger(`Loading jobs matching ${chalk.yellow(options.job)} only`);
+    statusBoardOptions.filters.jobFilter = options.job;
   }
 
-  if (argsOptimistic.dashboard) {
-    logger.log(`Loading dashboards matching ${chalk.yellow(argsOptimistic.dashboard)} only`);
-    statusBoardOptions.filters.dashboardFilter = argsOptimistic.dashboard;
+  if (options.dashboard) {
+    logger(`Loading dashboards matching ${chalk.yellow(options.dashboard)} only`);
+    statusBoardOptions.filters.dashboardFilter = options.dashboard;
   }
-  logger.log(chalk.gray('\nStarting server...'));
+  logger(chalk.gray('\nStarting server...'));
 
   startLogic(statusBoardOptions, logger, (err: any) => {
     callback(err);

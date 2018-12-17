@@ -36,8 +36,9 @@ export default class Start extends Command {
     this.log(`Name: ${args.name}`);
     this.log('Command \'start\' called with:');
     this.log('arguments: %j', args);
+    this.log('flags: %j', flags);
     this.log('options: %j', options);
-    start(args, options, this.log, (error: any) => {
+    start(args, flags, this.log, (error: any) => {
       if (error) {
         throw Error(error);
       }

@@ -1,3 +1,4 @@
+import statusBoard from 'status-board';
 import { directoryHasStatusBoardProject } from '../utilities';
 
 export function start(options: any, logger: any, callback: any) {
@@ -7,5 +8,5 @@ export function start(options: any, logger: any, callback: any) {
   }
 
   // start Status Board
-  // statusBoard(options, callback);
+  statusBoard(options, callback);
 }
