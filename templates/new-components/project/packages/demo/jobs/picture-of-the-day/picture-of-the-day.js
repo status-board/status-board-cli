@@ -1,14 +1,12 @@
-var $ = require('cheerio');
-
 module.exports = {
   onRun: function (config, dependencies, jobCallback) {
-    dependencies.easyRequest.HTML(config.url, function (err, body) {
+    dependencies.easyRequest.JSON(config.url, function (err, jsonBody, response) {
       if (err) {
         var errMsg = err || "ERROR: Couldn't access the web page at " + config.url;
         jobCallback(errMsg);
       } else {
-        var result = $('.primary_photo img', body).attr('src');
-        jobCallback(null, {imageSrc: result, title: config.widgetTitle});
+        var result = jsonBody.items[0];
+        jobCallback(null, { imageSrc: result.url, title: config.widgetTitle });
       }
     });
   }
