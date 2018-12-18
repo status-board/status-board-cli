@@ -23,16 +23,9 @@ export default class Generate extends Command {
   ];
 
   public async run() {
-    const { args } = this.parse(Generate);
-    const options = {};
+    const { args, flags } = this.parse(Generate);
 
-    this.log('Generate was called with:');
-    this.log(`Component: ${args.component}`);
-    this.log(`Name: ${args.name}`);
-    this.log('Command \'generate\' called with:');
-    this.log('arguments: %j', args);
-    this.log('options: %j', options);
-    generate(args, options, this.log, (error: any) => {
+    generate(args, flags, this.log, (error: any) => {
       if (error) {
         throw Error(error);
       }

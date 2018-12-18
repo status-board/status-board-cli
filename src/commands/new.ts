@@ -20,17 +20,9 @@ export default class New extends Command {
   ];
 
   public async run() {
-    const { args } = this.parse(New);
-    const options = {};
+    const { args, flags } = this.parse(New);
 
-    this.log('Generate was called with:');
-    this.log(`Component: ${args.component}`);
-    this.log(`Name: ${args.name}`);
-
-    this.log('Command \'new\' called with:');
-    this.log('arguments: %j', args);
-    this.log('options: %j', options);
-    newProject(args, options, this.log, (error?: string) => {
+    newProject(args, flags, this.log, (error?: string) => {
       if (error) {
         throw Error(error);
       }

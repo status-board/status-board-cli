@@ -10,13 +10,8 @@ export default class Install extends Command {
 
   public async run() {
     const { args, flags } = this.parse(Install);
-    const options = {};
 
-    this.log('Generate was called with:');
-    this.log('Command \'install\' called with:');
-    this.log('arguments: %j', args);
-    this.log('options: %j', options);
-    install(args, options, this.log, (error: any) => {
+    install(args, flags, this.log, (error: any) => {
       if (error) {
         throw Error(error);
       }

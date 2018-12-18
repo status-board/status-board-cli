@@ -6,14 +6,8 @@ export default class List extends Command {
 
   public async run() {
     const { args, flags } = this.parse(List);
-    const options = {};
 
-    const name = flags.name || 'world';
-    this.log(`hello ${name} from src/commands/list.ts`);
-    this.log('Command \'list\' called with:');
-    this.log('arguments: %j', args);
-    this.log('options: %j', options);
-    list(args, options, this.log, (error: any) => {
+    list(args, flags, this.log, (error: any) => {
       if (error) {
         throw Error(error);
       }

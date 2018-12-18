@@ -29,15 +29,7 @@ export default class Start extends Command {
 
   public async run() {
     const { args, flags } = this.parse(Start);
-    const options = {};
 
-    this.log('Generate was called with:');
-    this.log(`Component: ${args.component}`);
-    this.log(`Name: ${args.name}`);
-    this.log('Command \'start\' called with:');
-    this.log('arguments: %j', args);
-    this.log('flags: %j', flags);
-    this.log('options: %j', options);
     start(args, flags, this.log, (error: any) => {
       if (error) {
         throw Error(error);
