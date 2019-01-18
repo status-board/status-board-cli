@@ -32,7 +32,7 @@
     "@types/ejs": "2.6.1",
     "@types/jest": "23.3.12",
     "@types/mkdirp": "0.5.2",
-    "@types/node": "10.12.15",
+    "@types/node": "10.12.18",
     "@types/sanitize-filename": "1.1.28",
     "@types/semver": "5.5.0",
     "@types/underscore": "1.8.9",
