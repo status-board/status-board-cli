@@ -15,7 +15,7 @@
     "node": ">=0.10"
   },
   "dependencies": {
-    "status-board": "1.1.57"
+    "status-board": "1.1.58"
   },
   "devDependencies": {
     "mocha": "2.3.0"
