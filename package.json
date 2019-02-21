@@ -23,7 +23,7 @@
     "underscore": "1.9.1"
   },
   "devDependencies": {
-    "@oclif/dev-cli": "1.21.1",
+    "@oclif/dev-cli": "1.21.2",
     "@oclif/test": "1.2.4",
     "@oclif/tslint": "3.1.1",
     "@types/async": "2.4.1",
