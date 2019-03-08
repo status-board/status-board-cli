@@ -30,7 +30,7 @@
     "@types/chai": "4.1.7",
     "@types/debug": "4.1.2",
     "@types/ejs": "2.6.3",
-    "@types/jest": "24.0.9",
+    "@types/jest": "24.0.10",
     "@types/mkdirp": "0.5.2",
     "@types/node": "10.12.18",
     "@types/sanitize-filename": "1.1.28",
