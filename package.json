@@ -9,7 +9,7 @@
   "bugs": "https://github.com/jameswlane/status-board-cli/issues",
   "dependencies": {
     "@oclif/command": "1.5.12",
-    "@oclif/config": "1.12.11",
+    "@oclif/config": "1.12.12",
     "@oclif/plugin-help": "2.1.6",
     "async": "2.6.2",
     "debug": "4.1.1",
