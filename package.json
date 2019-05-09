@@ -38,7 +38,7 @@
     "@types/underscore": "1.8.14",
     "all-contributors-cli": "6.3.1",
     "chai": "4.2.0",
-    "codecov": "3.3.0",
+    "codecov": "3.4.0",
     "commitizen": "3.1.1",
     "cz-conventional-changelog": "2.1.0",
     "globby": "9.2.0",
