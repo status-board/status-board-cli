@@ -19,7 +19,7 @@
     "sanitize-filename": "1.6.1",
     "semver": "6.1.1",
     "status-board": "1.1.81",
-    "tslib": "1.9.3",
+    "tslib": "1.10.0",
     "underscore": "1.9.1"
   },
   "devDependencies": {
