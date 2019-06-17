@@ -13,7 +13,7 @@
     "@oclif/plugin-help": "2.2.0",
     "async": "3.0.1",
     "debug": "4.1.1",
-    "ejs": "2.6.1",
+    "ejs": "2.6.2",
     "mkdirp": "0.5.1",
     "read-package-json": "2.0.13",
     "sanitize-filename": "1.6.1",
