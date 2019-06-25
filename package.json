@@ -47,7 +47,7 @@
     "lint-staged": "8.2.1",
     "opt-cli": "1.6.0",
     "semantic-release": "15.13.16",
-    "snyk": "1.180.1",
+    "snyk": "1.184.0",
     "ts-jest": "24.0.2",
     "ts-node": "8.3.0",
     "tslint": "5.18.0",
