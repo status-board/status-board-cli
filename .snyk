@@ -8,3 +8,5 @@ patch:
         patched: '2019-07-04T03:41:58.501Z'
     - status-board > @types/winston > winston > async > lodash:
         patched: '2019-07-04T03:41:58.501Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2019-08-15T21:08:12.979Z'
