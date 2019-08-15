@@ -8,3 +8,21 @@ patch:
         patched: '2019-07-04T03:41:58.501Z'
     - status-board > @types/winston > winston > async > lodash:
         patched: '2019-07-04T03:41:58.501Z'
+    - snyk > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > @snyk/dep-graph > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > snyk-nodejs-lockfile-parser > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > snyk-nuget-plugin > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-08-15T20:42:38.698Z'
