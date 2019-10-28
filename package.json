@@ -34,7 +34,7 @@
     "@types/mkdirp": "0.5.2",
     "@types/node": "12.11.7",
     "@types/sanitize-filename": "1.6.3",
-    "@types/semver": "6.0.2",
+    "@types/semver": "6.2.0",
     "@types/underscore": "1.9.3",
     "all-contributors-cli": "6.9.3",
     "chai": "4.2.0",
