@@ -35,7 +35,7 @@
     "@types/node": "12.12.8",
     "@types/sanitize-filename": "1.6.3",
     "@types/semver": "6.2.0",
-    "@types/underscore": "1.9.3",
+    "@types/underscore": "1.9.4",
     "all-contributors-cli": "6.11.0",
     "chai": "4.2.0",
     "codecov": "3.6.1",
