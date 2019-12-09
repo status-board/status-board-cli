@@ -10,7 +10,7 @@
   "dependencies": {
     "@oclif/command": "1.5.19",
     "@oclif/config": "1.13.3",
-    "@oclif/plugin-help": "2.2.1",
+    "@oclif/plugin-help": "2.2.2",
     "async": "3.1.0",
     "debug": "4.1.1",
     "ejs": "2.7.2",
