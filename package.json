@@ -36,7 +36,7 @@
     "@types/sanitize-filename": "1.6.3",
     "@types/semver": "6.2.0",
     "@types/underscore": "1.9.4",
-    "all-contributors-cli": "6.11.0",
+    "all-contributors-cli": "6.11.2",
     "chai": "4.2.0",
     "codecov": "3.6.1",
     "commitizen": "4.0.3",
