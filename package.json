@@ -20,7 +20,8 @@
     "semver": "6.3.0",
     "status-board": "1.1.83",
     "tslib": "1.10.0",
-    "underscore": "1.9.2"
+    "underscore": "1.9.2",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "1.22.2",
@@ -109,12 +110,15 @@
     "verify:david": "david",
     "verify:npmvet": "npmvet --renderer ci --strict",
     "verify:audit": "npm audit fix",
-    "verify:tscheck": "types-checker"
+    "verify:tscheck": "types-checker",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "types": "lib/index.d.ts",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "snyk": true
 }
