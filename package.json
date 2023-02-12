@@ -42,7 +42,7 @@
     "commitizen": "4.0.3",
     "cz-conventional-changelog": "3.0.2",
     "globby": "10.0.1",
-    "jest": "24.9.0",
+    "jest": "29.4.2",
     "jest-junit": "8.0.0",
     "lint-staged": "9.5.0",
     "opt-cli": "1.6.0",
